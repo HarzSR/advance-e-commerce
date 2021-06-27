@@ -1,0 +1,7 @@
+Things done on this project
+- Create Blank Project Laravel 6
+- Install Auth for Laravel 6
+
+ToDo List
+
+Not ToDo List
