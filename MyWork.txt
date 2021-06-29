@@ -1,7 +1,11 @@
 Things done on this project
 - Create Blank Project Laravel 6
 - Install Auth for Laravel 6
+- Downloaded and Migrated CSS, JS, Images files into Public Admin folders
+- Created Admin Layout Pages
 
 ToDo List
+- Fix broken links
+- Redirect Admin Login
 
 Not ToDo List
