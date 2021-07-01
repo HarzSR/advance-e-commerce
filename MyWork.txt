@@ -4,10 +4,9 @@ Things done on this project
 - Downloaded and Migrated CSS, JS, Images files into Public Admin folders
 - Created Admin Layout Pages
 - Created Admin Route
+- Created Admin Login
+- Fixed Admin Auth
 
 ToDo List
-- Redirect Admin Login
-- Create Admin Login
-- Change IMG URL to Asset
 
 Not ToDo List
