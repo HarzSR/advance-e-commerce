@@ -290,7 +290,7 @@
                                         <!-- End Contact Item -->
                                         <li>
                                             <a href="#">
-                                                <img class="contacts-list-img" src="{{ asset('/images/admin_images/user8-128x128.jpg') }}" alt="User Avatar"
+                                                <img class="contacts-list-img" src="{{ asset('/images/admin_images/user8-128x128.jpg') }}" alt="User Avatar">
                                                 <div class="contacts-list-info">
                                                     <span class="contacts-list-name">
                                                         Kenneth M.

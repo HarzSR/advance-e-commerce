@@ -7,7 +7,10 @@ Things done on this project
 - Created Admin Login
 - Fixed Admin Auth
 - Add Admin Seeder
+- Admin Login with Guard
+- Created Admin Logout Function
 
 ToDo List
+- Sub Admin Login Issues
 
 Not ToDo List

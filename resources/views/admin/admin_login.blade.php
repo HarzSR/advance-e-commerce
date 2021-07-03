@@ -23,9 +23,36 @@
             <div class="card">
                 <div class="card-body login-card-body">
                     <p class="login-box-msg">Sign in to start your session</p>
-                    <form action="#" method="post">
+                    @if(Session::has('error_message'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{-- <strong>Oopsy!</strong> Something is wrong. Please try again. --}}
+                            <strong>Oopsy!</strong> {{ Session::get('error_message') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+                    @if(Session::has('success_message'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Bam!</strong> You have logged out. See you soon. Have a great time.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form action="{{ url('/admin') }}" method="post">
+                        @csrf
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control" placeholder="Email">
+                            <input name="email" id="email" type="email" class="form-control" placeholder="Email" value="{{ old('email') }}">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -33,7 +60,7 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input name="password" id="password" type="password" class="form-control" placeholder="Password" value="{{ old('password') }}">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
@@ -42,12 +69,14 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
+                                {{--
                                 <div class="icheck-primary">
-                                    <input type="checkbox" id="remember">
+                                    <input type="checkbox" name="remember" id="remember" @if(!empty(old('remember'))) checked @endif value="1">
                                     <label for="remember">
                                         Remember Me
                                     </label>
                                 </div>
+                                --}}
                             </div>
                             <!-- /.col -->
                             <div class="col-4">
