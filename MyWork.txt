@@ -11,9 +11,11 @@ Things done on this project
 - Created Admin Logout Function
 - Try New Validator
 - Remove Unwanted Dashboard Data
+- Settings Page
 
 ToDo List
 - Sub Admin Login Issues
 - Fix Sidebar
+- Settings Functions
 
 Not ToDo List
