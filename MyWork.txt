@@ -9,8 +9,11 @@ Things done on this project
 - Add Admin Seeder
 - Admin Login with Guard
 - Created Admin Logout Function
+- Try New Validator
+- Remove Unwanted Dashboard Data
 
 ToDo List
 - Sub Admin Login Issues
+- Fix Sidebar
 
 Not ToDo List

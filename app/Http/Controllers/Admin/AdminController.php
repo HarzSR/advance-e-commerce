@@ -25,22 +25,40 @@ class AdminController extends Controller
         {
             $data = $request->all();
 
+            // V0.1 Validator
+
             $validator = Validator::make($request->all(), [
-                'email' => 'required|regex:/(.+)@(.+)\.(.+)/i',
+                'email' => 'required|regex:/(.+)@(.+)\.(.+)/i|max:255',
                 // 'password' => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
                 'password' => 'required|min:6',
             ]
-            /*
-            [
-                'password.regex' => 'Incorrect Password Strength',
-            ]
-            */
+            // [
+            //     'password.regex' => 'Incorrect Password Strength',
+            // ]
             );
 
             if($validator->fails())
             {
                 return redirect()->back()->withErrors($validator)->withInput($request->input());
             }
+
+            /*
+
+            // V0.2 Validator
+
+            $rules = [
+                'email' => 'required|regex:/(.+)@(.+)\.(.+)/i|max:255',
+                // 'password' => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+                'password' => 'required|min:6',
+            ];
+            $customMessages = [
+                'email.required' => 'Please enter Email',
+                'email.regex' => 'Please enter Valid Email',
+                'password.required' => 'Please enter Password',
+            ];
+
+            $this->validate($request, $rules, $customMessages);
+            */
 
             if(Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password']]))
             {
