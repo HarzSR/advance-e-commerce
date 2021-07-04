@@ -6,6 +6,7 @@ use App\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Session;
 use Validator;
 
@@ -94,5 +95,64 @@ class AdminController extends Controller
         $userDetails = Admin::where('email', Auth::guard('admin')->user()->email)->first();
 
         return view('admin.admin_settings')->with(compact('userDetails'));
+    }
+
+    // Check Current Password Function
+
+    public function checkCurrentPassword(Request $request)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+
+            // echo "<pre>"; print_r($data["current_pwd"]);
+
+            if(Hash::check($data["current_pwd"], Auth::guard('admin')->user()->password))
+            {
+                echo "True";
+            }
+            else
+            {
+                echo "False";
+            }
+        }
+    }
+
+    // Update Settings Function
+
+    public function updateSettings(Request $request)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+
+            // V0.1 Validator
+
+            $validator = Validator::make($request->all(), [
+                    'username' => 'required|regex:/(^[A-Za-z0-9 ]+$)+/|max:255',
+                    'current_password' => 'required|min:6',
+                    'new_password' => 'required|min:6',
+                    'confirm_password' => 'required|min:6',
+                ]
+            // [
+            //     'password.regex' => 'Incorrect Password Strength',
+            // ]
+            );
+
+            if($validator->fails())
+            {
+                return redirect()->back()->withErrors($validator)->withInput($request->input());
+            }
+
+            if(Hash::check($data["current_password"], Auth::guard('admin')->user()->password))
+            {
+
+            }
+            else
+            {
+                Session::flash('error_message', 'Your Current Password is Incorrect, Please try again');
+                return redirect()->back();
+            }
+        }
     }
 }

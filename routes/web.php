@@ -24,8 +24,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('/admin')->namespace('Admin')->group(function (){
     Route::match(['get', 'post'], '/' , 'AdminController@login');
     Route::group(['middleware' => ['admin']], function (){
-        Route::get('dashboard', 'AdminController@dashboard');
-        Route::get('settings', 'AdminController@settings');
+        Route::get('dashboard', 'AdminController@dashboard')->name('Dashboard');
+        Route::get('settings', 'AdminController@settings')->name('Settings');
         Route::get('logout', 'AdminController@logout');
+        Route::post('check-current-password', 'AdminController@checkCurrentPassword');
+        Route::post('update-settings', 'AdminController@updateSettings');
     });
 });

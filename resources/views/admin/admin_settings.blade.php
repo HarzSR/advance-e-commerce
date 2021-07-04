@@ -31,15 +31,43 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Update Password</h3>
+                                <h3 class="card-title" style="margin-top: 10px;">Update Settings</h3>
+                                <a href="{{ url('/admin/dashboard') }}"><button class="btn btn-danger" style="float: right;">Dashboard</button></a>
                             </div>
+                            @if(Session::has('error_message'))
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{-- <strong>Oopsy!</strong> Something is wrong. Please try again. --}}
+                                    <strong>Oopsy!</strong> {{ Session::get('error_message') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
+                            @if(Session::has('success_message'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>Bam!</strong> You have logged out. See you soon. Have a great time.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
+                            @if($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form>
+                            <form role="form" method="post" action="{{ url('/admin/update-settings') }}" name="updateSettings" id="updateSettings">
+                                @csrf
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">User Name<span style="color: red;"> *</span></label>
-                                        <input type="text" class="form-control" id="username" name="username" value="{{ $userDetails->name }}" placeholder="Enter Name">
+                                        <input type="text" class="form-control" id="username" name="username" value="@if(!empty(old('username'))) {{ old('username') }} @else {{ $userDetails->name }} @endif" placeholder="Enter Name">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">User Email</label>
@@ -51,15 +79,16 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="current_password">Old/Current Password<span style="color: red;"> *</span></label>
-                                        <input type="password" class="form-control" id="current_password" name="current_password" placeholder="Old/Current Password">
+                                        <input type="password" class="form-control" id="current_password" name="current_password" placeholder="Old/Current Password" required>
+                                        <span id="currentPassword"></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="new_password">New Password<span style="color: red;"> *</span></label>
-                                        <input type="password" class="form-control" id="new_password" name="new_password" placeholder="New Password">
+                                        <input type="password" class="form-control" id="new_password" name="new_password" placeholder="New Password" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="confirm_password">Confirm Password<span style="color: red;"> *</span></label>
-                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
                                     </div>
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1">

@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>AdminLTE 3 | Dashboard</title>
+        <title>Advance E Commerce | {{ \Request::route()->getName() }} </title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -65,8 +66,8 @@
         <!-- Sparkline -->
         <script src="{{ url('/plugins/sparklines/sparkline.js') }}"></script>
         <!-- JQVMap -->
-        <script src="{{ url('/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
-        <script src="{{ url('/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
+        {{-- <script src="{{ url('/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
+        <script src="{{ url('/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script> --}}
         <!-- jQuery Knob Chart -->
         <script src="{{ url('/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
         <!-- daterangepicker -->
@@ -84,5 +85,7 @@
         <script src="{{ url('/js/admin_js/demo.js') }}"></script>
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <script src="{{ url('/js/admin_js/pages/dashboard.js') }}"></script>
+        <!-- Custom Script -->
+        <script src="{{ url('/js/admin_js/admin_script.js') }}"></script>
     </body>
 </html>

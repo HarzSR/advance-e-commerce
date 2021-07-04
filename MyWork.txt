@@ -12,10 +12,13 @@ Things done on this project
 - Try New Validator
 - Remove Unwanted Dashboard Data
 - Settings Page
+- Upgraded from 6.x to 7.x: Clear Cache and Config
+- Update Password/Settings
+- AJAX Confirmation of Current Password
 
 ToDo List
 - Sub Admin Login Issues
 - Fix Sidebar
-- Settings Functions
+- New Password and Confirm Password - should be same
 
 Not ToDo List
