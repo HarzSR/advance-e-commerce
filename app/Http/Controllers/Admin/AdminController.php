@@ -132,7 +132,7 @@ class AdminController extends Controller
                     'username' => 'required|regex:/(^[A-Za-z0-9 ]+$)+/|max:255',
                     'current_password' => 'required|min:6',
                     'new_password' => 'required|min:6',
-                    'confirm_password' => 'required|min:6',
+                    'confirm_password' => 'required|same:new_password|min:6',
                 ]
             // [
             //     'password.regex' => 'Incorrect Password Strength',
@@ -146,13 +146,24 @@ class AdminController extends Controller
 
             if(Hash::check($data["current_password"], Auth::guard('admin')->user()->password))
             {
-
+                if($data["new_password"] == $data["confirm_password"])
+                {
+                    Admin::where('id', Auth::guard('admin')->user()->id)->update(['name' => $data['username'], 'password' => bcrypt($data["new_password"])]);
+                    Session::flash('success_message', "Settings updated successfully");
+                }
+                else
+                {
+                    Session::flash('error_message', 'Your New Password and Confirm Password doesn\'t match. Please try again');
+                    return redirect()->back();
+                }
             }
             else
             {
                 Session::flash('error_message', 'Your Current Password is Incorrect, Please try again');
                 return redirect()->back();
             }
+
+            return redirect()->back();
         }
     }
 }

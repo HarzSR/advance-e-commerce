@@ -19,6 +19,5 @@ Things done on this project
 ToDo List
 - Sub Admin Login Issues
 - Fix Sidebar
-- New Password and Confirm Password - should be same
 
 Not ToDo List
