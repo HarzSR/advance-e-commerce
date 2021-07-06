@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Settings</h1>
+                        <h1 class="m-0">Admin Details</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ url('/admin/dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Settings</li>
+                            <li class="breadcrumb-item active">Admin Details</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -31,7 +31,7 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title" style="margin-top: 10px;">Update Settings</h3>
+                                <h3 class="card-title" style="margin-top: 10px;">Update Details</h3>
                                 <a href="{{ url('/admin/dashboard') }}"><button class="btn btn-danger" style="float: right;">Dashboard</button></a>
                             </div>
                             @if(Session::has('error_message'))
@@ -62,13 +62,9 @@
                             @endif
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form role="form" method="post" action="{{ url('/admin/update-settings') }}" name="updateSettings" id="updateSettings">
+                            <form role="form" method="post" action="{{ url('/admin/update-admin-details') }}" name="updateSettings" id="updateSettings" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">User Name<span style="color: red;"> *</span></label>
-                                        <input type="text" class="form-control" id="username" name="username" value="@if(!empty(old('username'))) {{ old('username') }} @else {{ trim($userDetails->name) }} @endif" placeholder="Enter Name">
-                                    </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">User Email</label>
                                         <input type="text" class="form-control" value="{{ $userDetails->email }}" disabled>
@@ -78,23 +74,31 @@
                                         <input type="text" class="form-control" value="{{ ucwords($userDetails->type) }}" disabled>
                                     </div>
                                     <div class="form-group">
-                                        <label for="current_password">Old/Current Password<span style="color: red;"> *</span></label>
-                                        <input type="password" class="form-control" id="current_password" name="current_password" placeholder="Old/Current Password" required>
-                                        <span id="currentPassword"></span>
+                                        <label for="exampleInputEmail1">User Name<span style="color: red;"> *</span></label>
+                                        <input type="text" class="form-control" id="username" name="username" value="@if(!empty(old('username'))) {{ old('username') }} @else {{ trim($userDetails->name) }} @endif" placeholder="Enter Name">
                                     </div>
                                     <div class="form-group">
-                                        <label for="new_password">New Password<span style="color: red;"> *</span></label>
-                                        <input type="password" class="form-control" id="new_password" name="new_password" placeholder="New Password" required>
+                                        <label for="exampleInputEmail1">User Number<span style="color: red;"> *</span></label>
+                                        {{-- <input type="tel" class="form-control" id="mobile" name="mobile" value="@if(!empty(old('mobile'))) {{ old('mobile') }} @else {{ trim($userDetails->mobile) }} @endif" placeholder="Enter Number" pattern="[0-9]{10}" > --}}
+                                        <input type="tel" class="form-control" id="mobile" name="mobile" value="@if(!empty(old('mobile'))) {{ old('mobile') }} @else {{ trim($userDetails->mobile) }} @endif" placeholder="Enter Number">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="confirm_password">Confirm Password<span style="color: red;"> *</span></label>
-                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                                    <div class="custom-file">
+                                        <label for="exampleInputFile">User Image<span style="color: red;"> *</span></label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="image" id="image">
+                                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">Upload</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary" style="float: right;">Update Settings</button>
+                                    <button type="submit" class="btn btn-primary" style="float: right;">Update Details</button>
                                 </div>
                             </form>
                         </div>

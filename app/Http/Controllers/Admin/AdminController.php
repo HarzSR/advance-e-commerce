@@ -166,4 +166,33 @@ class AdminController extends Controller
             return redirect()->back();
         }
     }
+
+    // Update Admin Details Function
+
+    public function updateAdminDetails(Request $request)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+
+            $validator = Validator::make($request->all(), [
+                    'username' => 'required|regex:/(^[A-Za-z0-9 ]+$)+/|max:255',
+                    'mobile' => 'required|regex:/^[+]?[0-9][0-9]{6,14}$/|min:6',
+                    'image' => 'required|mimes:jpeg,jpg,png|max:1000'
+                ]
+            );
+
+            if($validator->fails())
+            {
+                return redirect()->back()->withErrors($validator)->withInput($request->input());
+            }
+
+            Admin::where('id', Auth::guard('admin')->user()->id)->update(['name' => $data['username'], 'mobile' => $data['mobile']]);
+            Session::flash('success_message', "Details updated successfully");
+        }
+
+        $userDetails = Admin::where('email', Auth::guard('admin')->user()->email)->first();
+
+        return view('admin.admin_update_details')->with(compact('userDetails'));
+    }
 }

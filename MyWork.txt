@@ -15,9 +15,11 @@ Things done on this project
 - Upgraded from 6.x to 7.x: Clear Cache and Config
 - Update Password/Settings
 - AJAX Confirmation of Current Password
+- Update Admin Details
+- Sidebar Update
 
 ToDo List
 - Sub Admin Login Issues
-- Fix Sidebar
+- Update Image
 
 Not ToDo List
