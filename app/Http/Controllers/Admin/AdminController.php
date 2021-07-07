@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Image;
 use Session;
 use Validator;
 
@@ -178,7 +179,7 @@ class AdminController extends Controller
             $validator = Validator::make($request->all(), [
                     'username' => 'required|regex:/(^[A-Za-z0-9 ]+$)+/|max:255',
                     'mobile' => 'required|regex:/^[+]?[0-9][0-9]{6,14}$/|min:6',
-                    'image' => 'required|mimes:jpeg,jpg,png|max:1000'
+                    // 'image' => 'required_without:current_image|mimes:jpeg,jpg,png|max:1000'
                 ]
             );
 
@@ -187,7 +188,30 @@ class AdminController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput($request->input());
             }
 
-            Admin::where('id', Auth::guard('admin')->user()->id)->update(['name' => $data['username'], 'mobile' => $data['mobile']]);
+            if ($request->hasFile('image'))
+            {
+                $image_tmp = $request->file('image');
+
+                if ($image_tmp->isValid())
+                {
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    $imageName = time() . mt_rand() . '.' . $extension;
+
+                    $imagePath = "images/admin_images/admin_photos/" . $imageName;
+
+                    Image::make($image_tmp)->save($imagePath);
+                }
+            }
+            else if(!empty($data['current_image']))
+            {
+                $imageName = $data['current_image'];
+            }
+            else
+            {
+                $imageName = "";
+            }
+
+            Admin::where('id', Auth::guard('admin')->user()->id)->update(['name' => $data['username'], 'mobile' => $data['mobile'], 'image' => $imageName]);
             Session::flash('success_message', "Details updated successfully");
         }
 

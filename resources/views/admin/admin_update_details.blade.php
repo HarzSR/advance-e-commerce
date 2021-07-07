@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Admin Details</h1>
+                        <h1 class="m-0">User Details</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ url('/admin/dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Admin Details</li>
+                            <li class="breadcrumb-item active">User Details</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -83,16 +83,26 @@
                                         <input type="tel" class="form-control" id="mobile" name="mobile" value="@if(!empty(old('mobile'))) {{ old('mobile') }} @else {{ trim($userDetails->mobile) }} @endif" placeholder="Enter Number">
                                     </div>
                                     <div class="custom-file">
-                                        <label for="exampleInputFile">User Image<span style="color: red;"> *</span></label>
+                                        <label for="exampleInputFile">User Image</label>
                                         <div class="input-group">
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" name="image" id="image">
+                                                <input type="file" class="custom-file-input" name="image" id="image" accept="image/*">
                                                 <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                             </div>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">Upload</span>
                                             </div>
                                         </div>
+                                        @if(!empty($userDetails->image))
+                                            <div class="form-group" style="margin-top: 10px;">
+                                                <label for="exampleInputEmail1">Current Image</label>
+                                                <div class="input-group">
+                                                    {{-- <a href="{{ url('/images/admin_images/admin_photos/' . $userDetails->image) }}" target="_blank">View Image</a> --}}
+                                                    <img src="{{ asset('/images/admin_images/admin_photos/' . $userDetails->image) }}" alt="Display Pic" height="150px" width="150px">
+                                                    <input type="hidden" name="current_image" id="current_image" value="{{ $userDetails->image }}">
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
