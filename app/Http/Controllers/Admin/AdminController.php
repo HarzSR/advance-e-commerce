@@ -17,6 +17,8 @@ class AdminController extends Controller
 
     public function dashboard()
     {
+        Session::put('page', 'dashboard');
+
         return view('admin.admin_dashboard');
     }
 
@@ -83,6 +85,7 @@ class AdminController extends Controller
 
     public function logout()
     {
+        Session::flush();
         Auth::guard('admin')->logout();
         Session::flash('success_message', 'Logged Out Successfully');
 
@@ -93,6 +96,7 @@ class AdminController extends Controller
 
     public function settings()
     {
+        Session::put('page', 'settings');
         $userDetails = Admin::where('email', Auth::guard('admin')->user()->email)->first();
 
         return view('admin.admin_settings')->with(compact('userDetails'));
@@ -172,6 +176,8 @@ class AdminController extends Controller
 
     public function updateAdminDetails(Request $request)
     {
+        Session::put('page', 'account');
+
         if($request->isMethod('POST'))
         {
             $data = $request->all();
@@ -199,7 +205,7 @@ class AdminController extends Controller
 
                     $imagePath = "images/admin_images/admin_photos/" . $imageName;
 
-                    Image::make($image_tmp)->save($imagePath);
+                    Image::make($image_tmp)->resize(300, 400)->save($imagePath);
                 }
             }
             else if(!empty($data['current_image']))

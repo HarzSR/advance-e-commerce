@@ -16,11 +16,10 @@ Things done on this project
 - Update Password/Settings
 - AJAX Confirmation of Current Password
 - Update Admin Details
-- Sidebar Update
+- Sidebar Update => complete
 - Add Image
 
 ToDo List
 - Sub Admin Login Issues
-- Image Size Processing from Basic
 
 Not ToDo List

@@ -36,15 +36,15 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <a href="{{ url('/admin/dashboard') }}" class="nav-link">
+                        <a href="{{ url('/admin/dashboard') }}" class="nav-link @if(Session::get('page') == "dashboard") active @endif">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Dashboard
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item @if(Session::get('page') == "settings" || Session::get('page') == "account") menu-open @endif">
+                        <a href="#" class="nav-link @if(Session::get('page') == "settings" || Session::get('page') == "account") active @endif">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Settings
@@ -53,13 +53,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ url('/admin/settings') }}" class="nav-link">
+                                <a href="{{ url('/admin/settings') }}" class="nav-link @if(Session::get('page') == "settings") active @endif">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Password Settings</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('/admin/update-admin-details') }}" class="nav-link">
+                                <a href="{{ url('/admin/update-admin-details') }}" class="nav-link @if(Session::get('page') == "account") active @endif">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Details Settings</p>
                                 </a>
