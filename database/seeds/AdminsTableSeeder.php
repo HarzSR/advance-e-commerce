@@ -1,5 +1,6 @@
 <?php
 
+use App\Admin;
 use Illuminate\Database\Seeder;
 
 class AdminsTableSeeder extends Seeder
@@ -26,7 +27,7 @@ class AdminsTableSeeder extends Seeder
 
         foreach ($adminRecords as $key => $record)
         {
-            \App\Admin::create($record);
+            Admin::create($record);
         }
     }
 }
