@@ -19,6 +19,7 @@ Things done on this project
 - Sidebar Update => complete
 - Add Image
 - Added Sections DB, Migration, Model, Controller
+- Add Section
 
 ToDo List
 - Sub Admin Login Issues
