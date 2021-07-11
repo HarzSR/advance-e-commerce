@@ -70,15 +70,21 @@
                         <a href="#" class="nav-link @if(Session::get('page') == "view-sections" || Session::get('page') == "edit-sections") active @endif">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>
-                                Sections
+                                Catalogue
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ url('/admin/sections') }}" class="nav-link @if(Session::get('page') == "view-sections") active @endif">
+                                <a href="{{ url('/admin/view-sections') }}" class="nav-link @if(Session::get('page') == "view-sections") active @endif">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>View Sections</p>
+                                    <p>Sections</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('/admin/view-sections') }}" class="nav-link @if(Session::get('page') == "view-categories") active @endif">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Categories</p>
                                 </a>
                             </li>
                         </ul>

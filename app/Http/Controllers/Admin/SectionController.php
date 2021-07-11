@@ -11,11 +11,34 @@ class SectionController extends Controller
 {
     // Sections Function
 
-    public function sections()
+    public function viewSections()
     {
         Session::put('page', 'view-sections');
         $sections = Section::get();
 
-        return view('admin.sections.sections')->with(compact('sections'));
+        return view('admin.sections.view_sections')->with(compact('sections'));
+    }
+
+    // Update Section Status Function
+
+    public function updateSectionStatus(Request $request)
+    {
+        if($request->ajax())
+        {
+            $data = $request->all();
+
+            if($data['status'] == "Active")
+            {
+                $status = 0;
+            }
+            else
+            {
+                $status = 1;
+            }
+
+            Section::where('id', $data['section_id'])->update(['status' => $status]);
+
+            return response()->json(['status' => $status, 'section_id' => $data['section_id']]);
+        }
     }
 }

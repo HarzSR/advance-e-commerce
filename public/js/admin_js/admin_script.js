@@ -47,4 +47,35 @@ $(document).ready(function (){
             }
         });
     });
+
+    $(".updateSectionStatus").click(function (){
+        var status = $(this).text();
+        var section_id = $(this).attr("section_id");
+        $.ajax({
+            type: 'post',
+            data: {
+                status: status,
+                section_id: section_id,
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/admin/update-section-status',
+            success: function (response)
+            {
+                // console.log(response);
+                if(response['status'] == 0)
+                {
+                    $("#section-" + section_id).html("<a class=\"updateSectionStatus\" id=\"section-{{ " + section_id + " }}\" section_id=\"{{ " + section_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-danger btn-sm\" style=\"pointer-events: none;\">Inactive</button></a>");
+                }
+                else if(response['status'] == 1)
+                {
+                    $("#section-" + section_id).html("<a class=\"updateSectionStatus\" id=\"section-{{ " + section_id + " }}\" section_id=\"{{ " + section_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-success btn-sm\" style=\"pointer-events: none;\">Active</button></a>");
+                }
+            },
+            error: function (response) {
+                // console.log("Error : " + response);
+            }
+        });
+    });
 });

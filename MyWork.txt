@@ -20,6 +20,7 @@ Things done on this project
 - Add Image
 - Added Sections DB, Migration, Model, Controller
 - Add Section
+- Update Section Status
 
 ToDo List
 - Sub Admin Login Issues

@@ -9,7 +9,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Sections</h1>
+                        <h1 class="m-0">Catalogues</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -48,9 +48,9 @@
                                                 <td>{{ $section->name }}</td>
                                                 <td>
                                                     @if($section->status == 1)
-                                                        <button type="button" class="btn btn-success btn-sm" style="pointer-events: none;">Active</button>
+                                                        <a class="updateSectionStatus" id="section-{{ $section->id }}" section_id="{{ $section->id }}" href="javascript:void(0)"><button type="button" class="btn btn-success btn-sm" style="pointer-events: none;">Active</button></a>
                                                     @else
-                                                        <button type="button" class="btn btn-danger btn-sm" style="pointer-events: none;">Inactive</button>
+                                                        <a class="updateSectionStatus" id="section-{{ $section->id }}" section_id="{{ $section->id }}" href="javascript:void(0)"><button type="button" class="btn btn-danger btn-sm" style="pointer-events: none;">Inactive</button></a>
                                                     @endif
                                                 </td>
                                                 <td>

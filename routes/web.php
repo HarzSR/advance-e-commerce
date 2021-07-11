@@ -34,6 +34,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function (){
         Route::post('update-settings', 'AdminController@updateSettings');
         Route::match(['get', 'post'], 'update-admin-details', 'AdminController@updateAdminDetails')->name('Update Details');
 
-        Route::get('sections', 'SectionController@sections')->name('Sections');
+        Route::get('view-sections', 'SectionController@viewSections')->name('Sections');
+        Route::post('update-section-status', 'SectionController@updateSectionStatus');
     });
 });
