@@ -21,6 +21,7 @@ Things done on this project
 - Added Sections DB, Migration, Model, Controller
 - Add Section
 - Update Section Status
+- Add Category
 
 ToDo List
 - Sub Admin Login Issues
