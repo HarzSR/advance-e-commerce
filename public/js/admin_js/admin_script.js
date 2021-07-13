@@ -78,4 +78,35 @@ $(document).ready(function (){
             }
         });
     });
+
+    $(".updateCategoryStatus").click(function (){
+        var status = $(this).text();
+        var category_id = $(this).attr("category_id");
+        $.ajax({
+            type: 'post',
+            data: {
+                status: status,
+                category_id: category_id,
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/admin/update-category-status',
+            success: function (response)
+            {
+                // console.log(response);
+                if(response['status'] == 0)
+                {
+                    $("#category-" + category_id).html("<a class=\"updateCategoryStatus\" id=\"category-{{ " + category_id + " }}\" category_id=\"{{ " + category_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-danger btn-sm\" style=\"pointer-events: none;\">Inactive</button></a>");
+                }
+                else if(response['status'] == 1)
+                {
+                    $("#category-" + category_id).html("<a class=\"updateCategoryStatus\" id=\"category-{{ " + category_id + " }}\" category_id=\"{{ " + category_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-success btn-sm\" style=\"pointer-events: none;\">Active</button></a>");
+                }
+            },
+            error: function (response) {
+                // console.log("Error : " + response);
+            }
+        });
+    });
 });

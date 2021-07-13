@@ -66,7 +66,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item @if(Session::get('page') == "view-sections" || Session::get('page') == "edit-sections") menu-open @endif">
+                    <li class="nav-item @if(Session::get('page') == "view-sections" || Session::get('page') == "edit-sections" || Session::get('page') == "view-categories") menu-open @endif">
                         <a href="#" class="nav-link @if(Session::get('page') == "view-sections" || Session::get('page') == "edit-sections") active @endif">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>
@@ -82,7 +82,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('/admin/view-sections') }}" class="nav-link @if(Session::get('page') == "view-categories") active @endif">
+                                <a href="{{ url('/admin/view-categories') }}" class="nav-link @if(Session::get('page') == "view-categories") active @endif">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Categories</p>
                                 </a>

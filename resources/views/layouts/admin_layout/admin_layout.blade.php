@@ -121,6 +121,21 @@
                     ],
                 }).buttons().container().appendTo('#sections_wrapper .col-md-6:eq(0)');
             });
+            $(function () {
+                $("#categories").DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                    "columns": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        { "visible": false },
+                    ],
+                }).buttons().container().appendTo('#categories_wrapper .col-md-6:eq(0)');
+            });
         </script>
     </body>
 </html>
