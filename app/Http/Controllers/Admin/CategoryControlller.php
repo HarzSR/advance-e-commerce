@@ -41,4 +41,20 @@ class CategoryControlller extends Controller
             return response()->json(['status' => $status, 'category_id' => $data['category_id']]);
         }
     }
+
+    // Add/Edit Category Function
+
+    public function addEditCategory(Request $request, $id = null)
+    {
+        if($id == null)
+        {
+            $title = "Add Category";
+        }
+        else
+        {
+            $title = "Edit Category";
+        }
+
+        return view('admin.categories.add_edit_category')->with(compact('title'));
+    }
 }

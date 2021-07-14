@@ -28,7 +28,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Categories Data</h3>
+                                <h3 class="card-title" style="margin-top: 5px;">Categories Data</h3>
+                                <a href="{{ url('/admin/add-edit-category/') }}"><button type="button" class="btn btn-primary btn-sm" style="float: right; display: inline-block;">Add/Edit Category</button></a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">

@@ -22,8 +22,10 @@ Things done on this project
 - Add Section
 - Update Section Status
 - Add Category
+- Add/Edit Category
 
 ToDo List
 - Sub Admin Login Issues
+- Finish Form Import
 
 Not ToDo List

@@ -107,6 +107,7 @@
         <script src="{{ url('plugins/datatables-buttons/js/buttons.colVis.min.js')  }}"></script>
         <!-- Page specific script -->
         <script>
+            @if(Session::get('page') == "view-sections")
             $(function () {
                 $("#sections").DataTable({
                     "responsive": true,
@@ -121,6 +122,8 @@
                     ],
                 }).buttons().container().appendTo('#sections_wrapper .col-md-6:eq(0)');
             });
+            @endif
+            @if(Session::get('page') == "view-categories")
             $(function () {
                 $("#categories").DataTable({
                     "responsive": true,
@@ -136,6 +139,7 @@
                     ],
                 }).buttons().container().appendTo('#categories_wrapper .col-md-6:eq(0)');
             });
+            @endif
         </script>
     </body>
 </html>
