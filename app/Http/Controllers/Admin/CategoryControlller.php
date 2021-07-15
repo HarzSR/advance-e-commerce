@@ -51,6 +51,13 @@ class CategoryControlller extends Controller
         if($id == null)
         {
             $title = "Add Category";
+
+            if($request->isMethod('POST'))
+            {
+                $data = $request->all();
+
+                dd($data);
+            }
         }
         else
         {

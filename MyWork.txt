@@ -27,5 +27,6 @@ Things done on this project
 ToDo List
 - Sub Admin Login Issues
 - Ajax failure message display
+- Complete pushing Category to DB
 
 Not ToDo List
