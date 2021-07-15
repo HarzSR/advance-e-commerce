@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Section;
 use Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -46,6 +47,7 @@ class CategoryControlller extends Controller
 
     public function addEditCategory(Request $request, $id = null)
     {
+        Session::put('page', 'add-edit-category');
         if($id == null)
         {
             $title = "Add Category";
@@ -55,6 +57,8 @@ class CategoryControlller extends Controller
             $title = "Edit Category";
         }
 
-        return view('admin.categories.add_edit_category')->with(compact('title'));
+        $getSections = Section::get();
+
+        return view('admin.categories.add_edit_category')->with(compact('title', 'getSections'));
     }
 }

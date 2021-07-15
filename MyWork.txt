@@ -26,6 +26,6 @@ Things done on this project
 
 ToDo List
 - Sub Admin Login Issues
-- Finish Form Import
+- Ajax failure message display
 
 Not ToDo List

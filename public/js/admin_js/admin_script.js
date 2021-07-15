@@ -51,6 +51,7 @@ $(document).ready(function (){
     $(".updateSectionStatus").click(function (){
         var status = $(this).text();
         var section_id = $(this).attr("section_id");
+        $("#ajaxStatus-" + section_id).html("Loading...");
         $.ajax({
             type: 'post',
             data: {
@@ -67,10 +68,12 @@ $(document).ready(function (){
                 if(response['status'] == 0)
                 {
                     $("#section-" + section_id).html("<a class=\"updateSectionStatus\" id=\"section-{{ " + section_id + " }}\" section_id=\"{{ " + section_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-danger btn-sm\" style=\"pointer-events: none;\">Inactive</button></a>");
+                    $("#ajaxStatus-" + section_id).html("");
                 }
                 else if(response['status'] == 1)
                 {
                     $("#section-" + section_id).html("<a class=\"updateSectionStatus\" id=\"section-{{ " + section_id + " }}\" section_id=\"{{ " + section_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-success btn-sm\" style=\"pointer-events: none;\">Active</button></a>");
+                    $("#ajaxStatus-" + section_id).html("");
                 }
             },
             error: function (response) {
@@ -82,6 +85,7 @@ $(document).ready(function (){
     $(".updateCategoryStatus").click(function (){
         var status = $(this).text();
         var category_id = $(this).attr("category_id");
+        $("#ajaxStatus-" + category_id).html("Loading...");
         $.ajax({
             type: 'post',
             data: {
@@ -98,10 +102,12 @@ $(document).ready(function (){
                 if(response['status'] == 0)
                 {
                     $("#category-" + category_id).html("<a class=\"updateCategoryStatus\" id=\"category-{{ " + category_id + " }}\" category_id=\"{{ " + category_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-danger btn-sm\" style=\"pointer-events: none;\">Inactive</button></a>");
+                    $("#ajaxStatus" + category_id).html("");
                 }
                 else if(response['status'] == 1)
                 {
                     $("#category-" + category_id).html("<a class=\"updateCategoryStatus\" id=\"category-{{ " + category_id + " }}\" category_id=\"{{ " + category_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-success btn-sm\" style=\"pointer-events: none;\">Active</button></a>");
+                    $("#ajaxStatus" + category_id).html("");
                 }
             },
             error: function (response) {

@@ -14,6 +14,8 @@ class SectionsTableSeeder extends Seeder
     {
         // Add Global Sections Record
 
+        DB::table('sections')->truncate();
+
         $sectionRecords = [
             ['name' => 'Men', 'status' => 1],
             ['name' => 'Women', 'status' => 1],

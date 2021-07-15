@@ -48,9 +48,9 @@
                                                 <td>{{ $section->name }}</td>
                                                 <td>
                                                     @if($section->status == 1)
-                                                        <a class="updateSectionStatus" id="section-{{ $section->id }}" section_id="{{ $section->id }}" href="javascript:void(0)"><button type="button" class="btn btn-success btn-sm" style="pointer-events: none;">Active</button></a>
+                                                        <a class="updateSectionStatus" id="section-{{ $section->id }}" section_id="{{ $section->id }}" href="javascript:void(0)"><button type="button" class="btn btn-success btn-sm" style="pointer-events: none;">Active</button><span id="ajaxStatus-{{ $section->id }}" class="ajaxStatus-{{ $section->id }}"></span></a>
                                                     @else
-                                                        <a class="updateSectionStatus" id="section-{{ $section->id }}" section_id="{{ $section->id }}" href="javascript:void(0)"><button type="button" class="btn btn-danger btn-sm" style="pointer-events: none;">Inactive</button></a>
+                                                        <a class="updateSectionStatus" id="section-{{ $section->id }}" section_id="{{ $section->id }}" href="javascript:void(0)"><button type="button" class="btn btn-danger btn-sm" style="pointer-events: none;">Inactive</button><span id="ajaxStatus-{{ $section->id }}" class="ajaxStatus-{{ $section->id }}"></span></a>
                                                     @endif
                                                 </td>
                                                 <td>

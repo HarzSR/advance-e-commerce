@@ -14,7 +14,7 @@ class AdminsTableSeeder extends Seeder
     {
         // Add Global Super Admin Record
 
-        DB::table('admins')->delete();
+        DB::table('admins')->truncate();
 
         $adminRecords = [
             ['name' => 'Administrator 1', 'type' => 'admin', 'mobile' => '1234567890', 'email' => 'admin1@admin.com', 'password' => '$2y$10$Bjo7KGOk07XrRLuQbVFr1urjM4xfdrhkxRa9QaJjFjqCJnrxU4vdG', 'image' => '', 'status' => 1],
