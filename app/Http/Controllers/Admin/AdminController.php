@@ -75,7 +75,7 @@ class AdminController extends Controller
                 return redirect()->back()->withInput($request->input());
             }
 
-            dd($data);
+            // dd($data);
         }
 
         return view('admin.admin_login');

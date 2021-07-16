@@ -95,7 +95,7 @@
                                         <div class="form-group">
                                             <label>Category Level</label>
                                             <select class="form-control select2" id="parent_id" name="parent_id" style="width: 100%;">
-                                                <option selected="0">Main Category</option>
+                                                <option value="0">Main Category</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -118,7 +118,11 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary" style="float: right;">Submit</button>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="status" name="status" value="1" style="margin-top: 15px;">
+                                    <label class="form-check-label" for="status" style="margin-top: 9px;">Status</label>
+                                    <button type="submit" class="btn btn-primary" style="float: right; display: inline-block">Submit</button>
+                                </div>
                             </div>
                         </div>
                     </form>

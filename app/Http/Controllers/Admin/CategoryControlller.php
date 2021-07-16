@@ -56,7 +56,24 @@ class CategoryControlller extends Controller
             {
                 $data = $request->all();
 
-                dd($data);
+                $validator = Validator::make($request->all(), [
+                        'category_name' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        'section_id' => 'required|numeric',
+                        'exampleInputFile' => 'mimes:jpeg,png,jpg',
+                        'category_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        'meta_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        'category_url' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        'parent_id' => 'required|numeric',
+                        'category_discount' => 'required|between:0,99.99',
+                        'meta_title' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        'meta_keywords' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                    ]
+                );
+
+                if($validator->fails())
+                {
+                    return redirect()->back()->withErrors($validator)->withInput($request->input());
+                }
             }
         }
         else
