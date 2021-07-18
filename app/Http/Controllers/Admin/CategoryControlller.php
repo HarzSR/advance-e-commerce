@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Section;
 use Session;
+use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -58,15 +59,15 @@ class CategoryControlller extends Controller
 
                 $validator = Validator::make($request->all(), [
                         'category_name' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
-                        'section_id' => 'required|numeric',
-                        'exampleInputFile' => 'mimes:jpeg,png,jpg',
+                        'section_id' => 'required',
+                        'image' => 'mimes:jpeg,png,jpg',
                         'category_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
-                        'meta_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
-                        'category_url' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        // 'meta_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        'category_url' => 'required|regex:/^([a-z0-9]+-)*[a-z0-9]+$/i|max:255',
                         'parent_id' => 'required|numeric',
                         'category_discount' => 'required|between:0,99.99',
-                        'meta_title' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
-                        'meta_keywords' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        // 'meta_title' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        // 'meta_keywords' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
                     ]
                 );
 
