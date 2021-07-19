@@ -75,6 +75,12 @@ class CategoryControlller extends Controller
                 {
                     return redirect()->back()->withErrors($validator)->withInput($request->input());
                 }
+
+                $category = new Category();
+
+                $category->parent_id = $data['parent_id'];
+
+                $category->save();
             }
         }
         else
