@@ -27,6 +27,6 @@ Things done on this project
 ToDo List
 - Sub Admin Login Issues
 - Ajax failure message display
-- Added Validator to Category: push back error and if valid push to DB
+- Add Category: Need Test
 
 Not ToDo List

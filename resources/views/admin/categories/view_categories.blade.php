@@ -30,6 +30,25 @@
                             <div class="card-header">
                                 <h3 class="card-title" style="margin-top: 5px;">Categories Data</h3>
                                 <a href="{{ url('/admin/add-edit-category/') }}"><button type="button" class="btn btn-primary btn-sm" style="float: right; display: inline-block;">Add/Edit Category</button></a>
+                                @if(Session::has('error_message'))
+                                    <br>
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        {{-- <strong>Oopsy!</strong> Something is wrong. Please try again. --}}
+                                        <strong>Oopsy!</strong> {{ Session::get('error_message') }}.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
+                                @if(Session::has('success_message'))
+                                    <br>
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>Bam!</strong> You have logged out. See you soon. Have a great time.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">

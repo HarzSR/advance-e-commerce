@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Section;
+use Image;
 use Session;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -60,12 +61,12 @@ class CategoryControlller extends Controller
                 $validator = Validator::make($request->all(), [
                         'category_name' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
                         'section_id' => 'required',
-                        'image' => 'mimes:jpeg,png,jpg',
+                        'image' => 'sometimes|mimes:jpeg,png,jpg',
                         'category_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
                         // 'meta_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
                         'category_url' => 'required|regex:/^([a-z0-9]+-)*[a-z0-9]+$/i|max:255',
                         'parent_id' => 'required|numeric',
-                        'category_discount' => 'required|between:0,99.99',
+                        'category_discount' => 'required|numeric|between:0,99.99',
                         // 'meta_title' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
                         // 'meta_keywords' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
                     ]
@@ -79,8 +80,51 @@ class CategoryControlller extends Controller
                 $category = new Category();
 
                 $category->parent_id = $data['parent_id'];
+                $category->section_id = $data['section_id'];
+                $category->category_name = $data['category_name'];
+                $category->category_discount = $data['category_discount'];
+                $category->description = $data['category_description'];
+                $category->url = $data['category_url'];
+                $category->meta_description = $data['meta_description'];
+                $category->meta_title = $data['meta_title'];
+                $category->meta_keywords = $data['meta_keywords'];
+                $category->meta_keywords = $data['meta_keywords'];
+
+                if($request->hasFile('image'))
+                {
+                    $image_tmp = $request->file('image');
+                    if($image_tmp->isValid())
+                    {
+                        // $extension = $image_tmp->getClientOriginalExtension();
+                        $extension = $image_tmp->extension();
+                        $fileName = time() . mt_rand() . '.' . $extension;
+
+                        $large_image_path = 'images/category_images/large/' . $fileName;
+                        $medium_image_path = 'images/category_images/medium/' . $fileName;
+                        $small_image_path = 'images/category_images/small/' . $fileName;
+
+                        Image::make($image_tmp)->save($large_image_path);
+                        Image::make($image_tmp)->resize(600, 600)->save($medium_image_path);
+                        Image::make($image_tmp)->resize(300, 300)->save($small_image_path);
+
+                        $category->category_image = $fileName;
+                    }
+                }
+
+                if(empty($data['status']))
+                {
+                    $category->status = 0;
+                }
+                else if($data['status'])
+                {
+                    $category->status = 1;
+                }
 
                 $category->save();
+
+                Session::flash('success_message', 'Category Added Successfully');
+
+                return redirect('/admin/view-categories');
             }
         }
         else
