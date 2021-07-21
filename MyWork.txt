@@ -28,5 +28,7 @@ ToDo List
 - Sub Admin Login Issues
 - Ajax failure message display
 - Add Category: Need Test
+- Add Category - Fix Parent ID along with more conditions
+- Add Category - Fix SubCategories
 
 Not ToDo List

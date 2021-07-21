@@ -42,7 +42,8 @@ $(document).ready(function (){
                     $("#confirm_password").removeAttr("disabled");
                 }
             },
-            error: function (response) {
+            error: function (response)
+            {
                 // console.log("Error : " + response);
             }
         });
@@ -76,7 +77,8 @@ $(document).ready(function (){
                     $("#ajaxStatus-" + section_id).html("");
                 }
             },
-            error: function (response) {
+            error: function (response)
+            {
                 // console.log("Error : " + response);
             }
         });
@@ -110,9 +112,35 @@ $(document).ready(function (){
                     $("#ajaxStatus" + category_id).html("");
                 }
             },
-            error: function (response) {
+            error: function (response)
+            {
                 // console.log("Error : " + response);
             }
         });
     });
+
+    $("#section_id").change(function () {
+        var section_id = $(this).val();
+        $.ajax({
+            type: 'post',
+            data: {
+                section_id: section_id
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/admin/append-categories-level',
+            success: function (response)
+            {
+                // console.log(response);
+                $("#append_categories_level").html(response);
+            },
+            error: function (response)
+            {
+                // console.log("Error : " + response);
+            }
+        });
+    });
+
+    // On Page Load check for Section ID and Old
 });

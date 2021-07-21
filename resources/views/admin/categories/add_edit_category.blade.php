@@ -128,15 +128,10 @@
                                             <label for="exampleInputEmail1">Category URL</label><span style="color: red;"> *</span>
                                             <input type="text" class="form-control" id="category_url" name="category_url" value="{{ old('category_url') }}" placeholder="Enter Category URL">
                                         </div>
-                                        <div class="form-group">
-                                            <label>Category Level</label><span style="color: red;"> *</span>
-                                            <select class="form-control select2" id="parent_id" name="parent_id" style="width: 100%;">
-                                                @if(!old('section_id'))
-                                                    <option value="0">Main Category</option>
-                                                @else
-                                                    <option value="0">Main Category</option>
-                                                @endif
-                                            </select>
+                                        <div id="append_categories_level" name="append_categories_level">
+
+                                            @include('admin.categories.append_categories_level')
+
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Category Discount</label><span style="color: red;"> *</span>
