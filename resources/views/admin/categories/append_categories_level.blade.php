@@ -6,6 +6,11 @@
                 @if(!empty($getCategories))
                     @foreach($getCategories as $getCategory)
                         <option value="{{ $getCategory->id }}">{{ $getCategory->category_name }}</option>
+                        @if(!empty($category->subcategories))
+                            @foreach($category->subcategories as $subcategory)
+                                <option value="{{ $subcategory->id }}">-- {{ $subcategory->category_name }}</option>
+                            @endforeach
+                        @endif
                     @endforeach
                 @endif
             @else
@@ -13,6 +18,11 @@
                 @if(!empty($getCategories))
                     @foreach($getCategories as $getCategory)
                         <option value="{{ $getCategory->id }}" @if($getCategory->id == old('parent_id')) selected @endif>{{ $getCategory->category_name }}</option>
+                        @if(!empty($category->subcategories))
+                            @foreach($category->subcategories as $subcategory)
+                                <option value="{{ $subcategory->id }}">-- {{ $subcategory->category_name }}</option>
+                            @endforeach
+                        @endif
                     @endforeach
                 @endif
             @endif

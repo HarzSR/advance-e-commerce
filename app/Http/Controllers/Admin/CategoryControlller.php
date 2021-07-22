@@ -17,7 +17,7 @@ class CategoryControlller extends Controller
     public function viewCategories()
     {
         Session::put('page', 'view-categories');
-        $categories = Category::get();
+        $categories = Category::with('subCategories')->get();
 
         return view('admin.categories.view_categories')->with(compact('categories'));
     }
@@ -86,9 +86,30 @@ class CategoryControlller extends Controller
                 $category->description = $data['category_description'];
                 $category->url = $data['category_url'];
                 $category->meta_description = $data['meta_description'];
-                $category->meta_title = $data['meta_title'];
-                $category->meta_keywords = $data['meta_keywords'];
-                $category->meta_keywords = $data['meta_keywords'];
+                if(!empty($data['meta_title']))
+                {
+                    $category->meta_title = $data['meta_title'];
+                }
+                else
+                {
+                    $category->meta_title = '';
+                }
+                if(!empty($data['meta_keywords']))
+                {
+                    $category->meta_keywords = $data['meta_keywords'];
+                }
+                else
+                {
+                    $category->meta_keywords = '';
+                }
+                if(!empty($data['meta_description']))
+                {
+                    $category->meta_description = $data['meta_description'];
+                }
+                else
+                {
+                    $category->meta_description = '';
+                }
 
                 if($request->hasFile('image'))
                 {
@@ -109,6 +130,10 @@ class CategoryControlller extends Controller
 
                         $category->category_image = $fileName;
                     }
+                }
+                else
+                {
+                    $category->category_image = '';
                 }
 
                 if(empty($data['status']))
