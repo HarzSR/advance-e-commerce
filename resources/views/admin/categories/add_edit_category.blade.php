@@ -129,6 +129,9 @@
                                             <input type="text" class="form-control" id="category_url" name="category_url" value="{{ old('category_url') }}" placeholder="Enter Category URL">
                                         </div>
                                         <div id="append_categories_level" name="append_categories_level">
+                                            <script>
+                                                var parent_id = @if(old('parent_id')) {{ old('parent_id') }} @else null @endif
+                                            </script>
 
                                             @include('admin.categories.append_categories_level')
 
