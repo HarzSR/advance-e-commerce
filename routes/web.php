@@ -40,11 +40,11 @@ Route::prefix('/admin')->namespace('Admin')->group(function (){
         Route::post('update-section-status', 'SectionController@updateSectionStatus');
 
         // Categories
-        Route::get('view-categories', 'CategoryControlller@viewCategories')->name('Categories');
-        Route::post('update-category-status', 'CategoryControlller@updateCategoryStatus');
-        // Route::match(['get', 'post'], 'add-edit-category/{id?}', 'CategoryControlller@addEditCategory')->name('Add/Edit Category');
-        Route::match(['get', 'post'], 'add-edit-category', 'CategoryControlller@addEditCategory')->name('Add Category');
-        Route::match(['get', 'post'], 'add-edit-category/{id}', 'CategoryControlller@addEditCategory')->name('Edit Category');
-        Route::post('append-categories-level', 'CategoryControlller@appendCategoryLevel');
+        Route::get('view-categories', 'CategoryController@viewCategories')->name('Categories');
+        Route::post('update-category-status', 'CategoryController@updateCategoryStatus');
+        // Route::match(['get', 'post'], 'add-edit-category/{id?}', 'CategoryController@addEditCategory')->name('Add/Edit Category');
+        Route::match(['get', 'post'], 'add-edit-category', 'CategoryController@addEditCategory')->name('Add Category');
+        Route::match(['get', 'post'], 'add-edit-category/{id}', 'CategoryController@addEditCategory')->name('Edit Category');
+        Route::post('append-categories-level', 'CategoryController@appendCategoryLevel');
     });
 });

@@ -10,14 +10,14 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CategoryControlller extends Controller
+class CategoryController extends Controller
 {
     // Categories Function
 
     public function viewCategories()
     {
         Session::put('page', 'view-categories');
-        $categories = Category::with('subCategories')->get();
+        $categories = Category::with('section', 'parentCategory')->get();
 
         return view('admin.categories.view_categories')->with(compact('categories'));
     }

@@ -56,6 +56,8 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Section</th>
+                                        <th>Parent Category</th>
                                         <th>Name</th>
                                         <th>URL</th>
                                         <th>Status</th>
@@ -66,7 +68,9 @@
                                     @foreach($categories as $category)
                                         <tr>
                                             <td>{{ $category->id }}</td>
-                                            <td>{{ $category->category_name }}</td>
+                                            <td>{{ ucwords($category->section->name) }}</td>
+                                            <td>@if(!empty($category->parentCategory)) {{ ucwords($category->parentCategory->category_name) }} @else  @endif</td>
+                                            <td>{{ ucwords($category->category_name) }}</td>
                                             <td>{{ $category->url }}</td>
                                             <td>
                                                 @if($category->status == 1)
@@ -85,6 +89,8 @@
                                     <tfoot>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Section</th>
+                                        <th>Parent Category</th>
                                         <th>Name</th>
                                         <th>URL</th>
                                         <th>Status</th>
