@@ -53,6 +53,8 @@ class CategoryController extends Controller
         if($id == null)
         {
             $title = "Add Category";
+            $categoryData = '';
+            $getCategory = '';
 
             if($request->isMethod('POST'))
             {
@@ -155,11 +157,40 @@ class CategoryController extends Controller
         else
         {
             $title = "Edit Category";
+
+            if($request->isMethod('POST'))
+            {
+                $data = $request->all();
+
+                $validator = Validator::make($request->all(), [
+                        'category_name' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        'section_id' => 'required',
+                        'image' => 'sometimes|mimes:jpeg,png,jpg',
+                        'category_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        // 'meta_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        'category_url' => 'required|regex:/^([a-z0-9]+-)*[a-z0-9]+$/i|max:255',
+                        'parent_id' => 'required|numeric',
+                        'category_discount' => 'required|numeric|between:0,99.99',
+                        // 'meta_title' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        // 'meta_keywords' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                    ]
+                );
+
+                if($validator->fails())
+                {
+                    return redirect()->back()->withErrors($validator)->withInput($request->input());
+                }
+
+                dd($data);
+            }
+
+            $categoryData = Category::where('id', $id)->first();
+            $getCategory = Category::with('subCategories')->where(['parent_id' => 0, 'section_id' => $categoryData->section_id])->get();
         }
 
         $getSections = Section::get();
 
-        return view('admin.categories.add_edit_category')->with(compact('title', 'getSections'));
+        return view('admin.categories.add_edit_category')->with(compact('title', 'getSections', 'categoryData', 'getCategory'));
     }
 
     // Append Category Level Function

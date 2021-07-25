@@ -80,7 +80,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-warning btn-sm">Edit</button>
+                                                <a href="{{ url('/admin/add-edit-category/' . $category->id) }}"><button type="button" class="btn btn-warning btn-sm">Edit</button></a>
                                                 <button type="button" class="btn btn-danger btn-sm">Delete</button>
                                             </td>
                                         </tr>
