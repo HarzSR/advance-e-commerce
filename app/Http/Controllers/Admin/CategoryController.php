@@ -54,7 +54,8 @@ class CategoryController extends Controller
         {
             $title = "Add Category";
             $categoryData = '';
-            $getCategory = '';
+            $getCategories = '';
+            $getCategoryData = '';
 
             if($request->isMethod('POST'))
             {
@@ -87,7 +88,6 @@ class CategoryController extends Controller
                 $category->category_discount = $data['category_discount'];
                 $category->description = $data['category_description'];
                 $category->url = $data['category_url'];
-                $category->meta_description = $data['meta_description'];
                 if(!empty($data['meta_title']))
                 {
                     $category->meta_title = $data['meta_title'];
@@ -181,16 +181,86 @@ class CategoryController extends Controller
                     return redirect()->back()->withErrors($validator)->withInput($request->input());
                 }
 
-                dd($data);
+                $parent_id = $data['parent_id'];
+                $section_id = $data['section_id'];
+                $category_name = $data['category_name'];
+                $category_discount = $data['category_discount'];
+                $description = $data['category_description'];
+                $url = $data['category_url'];
+                if(!empty($data['meta_title']))
+                {
+                    $meta_title = $data['meta_title'];
+                }
+                else
+                {
+                    $meta_title = '';
+                }
+                if(!empty($data['meta_keywords']))
+                {
+                    $meta_keywords = $data['meta_keywords'];
+                }
+                else
+                {
+                    $meta_keywords = '';
+                }
+                if(!empty($data['meta_description']))
+                {
+                    $meta_description = $data['meta_description'];
+                }
+                else
+                {
+                    $meta_description = '';
+                }
+
+                if($request->hasFile('image'))
+                {
+                    $image_tmp = $request->file('image');
+                    if($image_tmp->isValid())
+                    {
+                        // $extension = $image_tmp->getClientOriginalExtension();
+                        $extension = $image_tmp->extension();
+                        $fileName = time() . mt_rand() . '.' . $extension;
+
+                        $large_image_path = 'images/category_images/large/' . $fileName;
+                        $medium_image_path = 'images/category_images/medium/' . $fileName;
+                        $small_image_path = 'images/category_images/small/' . $fileName;
+
+                        Image::make($image_tmp)->save($large_image_path);
+                        Image::make($image_tmp)->resize(600, 600)->save($medium_image_path);
+                        Image::make($image_tmp)->resize(300, 300)->save($small_image_path);
+
+                        $category_image = $fileName;
+                    }
+                }
+                else
+                {
+                    $category_image = '';
+                }
+
+                if(empty($data['status']))
+                {
+                    $status = 0;
+                }
+                else if($data['status'])
+                {
+                    $status = 1;
+                }
+
+                Category::where('id', $id)->update(['parent_id' => $parent_id, 'section_id' => $section_id, 'category_name' => $category_name, 'category_discount' => $category_discount, 'description' => $description, 'url' => $url, 'meta_title' => $meta_title, 'meta_keywords' => $meta_keywords, 'meta_description' => $meta_description, 'category_image' => $category_image, 'status' => $status,]);
+
+                Session::flash('success_message', 'Category Updated Successfully');
+
+                return redirect('/admin/view-categories');
             }
 
             $categoryData = Category::where('id', $id)->first();
-            $getCategory = Category::with('subCategories')->where(['parent_id' => 0, 'section_id' => $categoryData->section_id])->get();
+            $getCategories = Category::with('subCategories')->where(['parent_id' => 0, 'section_id' => $categoryData->section_id])->get();
+            $getCategoryData = Category::find($id);
         }
 
         $getSections = Section::get();
 
-        return view('admin.categories.add_edit_category')->with(compact('title', 'getSections', 'categoryData', 'getCategory'));
+        return view('admin.categories.add_edit_category')->with(compact('title', 'getSections', 'categoryData', 'getCategories', 'getCategoryData'));
     }
 
     // Append Category Level Function

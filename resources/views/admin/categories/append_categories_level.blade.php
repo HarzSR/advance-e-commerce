@@ -8,23 +8,23 @@
                         <option value="{{ $getCategory->id }}">{{ $getCategory->category_name }}</option>
                         @if(!empty($getCategory->subCategories))
                             @foreach($getCategory->subCategories as $subcategory)
-                                <option value="{{ $subcategory->id }}">&raquo;&nbsp;&nbsp; {{ $subcategory->category_name }}</option>
+                                <option value="{{ $subcategory->id }}"> &raquo;&nbsp;&nbsp; {{ $subcategory->category_name }}</option>
                             @endforeach
                         @endif
                     @endforeach
                 @endif
-            @else
+            {{-- @else
                 <option value="0">Main Category</option>
                 @if(!empty($getCategories))
                     @foreach($getCategories as $getCategory)
                         <option value="{{ $getCategory->id }}" @if($getCategory->id == old('parent_id')) selected @endif>{{ $getCategory->category_name }}</option>
                         @if(!empty($getCategory->subCategories))
                             @foreach($getCategory->subCategories as $subcategory)
-                                <option value="{{ $subcategory->id }}">&raquo;&nbsp;&nbsp; {{ $subcategory->category_name }}</option>
+                                <option value="{{ $subcategory->id }}"> &raquo;&nbsp;&nbsp; {{ $subcategory->category_name }}</option>
                             @endforeach
                         @endif
                     @endforeach
-                @endif
+                @endif --}}
             @endif
         </select>
     </div>

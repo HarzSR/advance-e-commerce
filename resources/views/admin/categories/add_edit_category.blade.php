@@ -124,7 +124,10 @@
                                         </div>
                                         <div id="append_categories_level" name="append_categories_level">
                                             <script>
-                                                var parent_id = @if(old('parent_id')) {{ old('parent_id') }} @else {{ $categoryData->parent_id }} @endif
+                                                var parent_id = @if(old('parent_id')) {{ old('parent_id') }} @else {{ $categoryData->parent_id }} @endif;
+                                                @if($title == "Edit Category")
+                                                    var disable_id = {{ $getCategoryData->id }};
+                                                @endif
                                             </script>
 
                                             @include('admin.categories.append_categories_level')
@@ -264,7 +267,10 @@
                                         </div>
                                         <div id="append_categories_level" name="append_categories_level">
                                             <script>
-                                                var parent_id = @if(old('parent_id')) {{ old('parent_id') }} @else null @endif
+                                                var parent_id = @if(old('parent_id')) {{ old('parent_id') }} @else null @endif;
+                                                @if($title == "Edit Category")
+                                                    var disable_id = null;
+                                                @endif
                                             </script>
 
                                             @include('admin.categories.append_categories_level')
