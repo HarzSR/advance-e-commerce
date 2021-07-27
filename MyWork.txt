@@ -23,11 +23,13 @@ Things done on this project
 - Update Section Status
 - Add Category
 - Add/Edit Category
+- Delete Category Image - Hard and Soft
 
 ToDo List
 - Sub Admin Login Issues
 - Ajax failure message display
 - Add Category: Need Test
 - Edit Category fixing - Category dropdown issues (Remove self category)
+- Edit Image - should check for empty string and retian old value
 
 Not ToDo List

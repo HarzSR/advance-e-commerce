@@ -276,4 +276,39 @@ class CategoryController extends Controller
             return view('admin.categories.append_categories_level')->with(compact('getCategories'));
         }
     }
+
+    // Delete Category Image Function
+
+    public function deleteCategoryImage($id = null)
+    {
+        // Hard Delete
+
+        $categoryImage = Category::select('category_image')->where(['id' => $id])->first();
+
+        $large_image_path = 'images/category_images/large/' . $categoryImage->category_image;
+        $medium_image_path = 'images/category_images/medium/' . $categoryImage->category_image;
+        $small_image_path = 'images/category_images/small/' . $categoryImage->category_image;
+
+        // File::delete($large_image_path, $medium_image_path, $small_image_path);
+        if (file_exists($large_image_path) && !empty($categoryImage->category_image))
+        {
+            unlink($large_image_path);
+        }
+        if (file_exists($medium_image_path) && !empty($categoryImage->category_image))
+        {
+            unlink($medium_image_path);
+        }
+        if (file_exists($small_image_path) && !empty($categoryImage->category_image))
+        {
+            unlink($small_image_path);
+        }
+
+        // Soft Delete
+
+        Category::where(['id' => $id])->update(['category_image' => '']);
+
+        Session::flash('success_message', 'Product Image Removed Successfully');
+
+        return redirect()->back();
+    }
 }

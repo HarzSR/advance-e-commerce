@@ -10,6 +10,36 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1>Catalogues</h1>
+                        @if(Session::has('error_message'))
+                            <br>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{-- <strong>Oopsy!</strong> Something is wrong. Please try again. --}}
+                                <strong>Oopsy!</strong> {{ Session::get('error_message') }}.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        @if(Session::has('success_message'))
+                            <br>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Bam!</strong> {{ Session::get('success_message') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        @if($errors->any())
+                            <br>
+                            <br>
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -32,36 +62,6 @@
                         <div class="card card-default">
                             <div class="card-header">
                                 <h3 class="card-title">{{ ucwords($title) }}</h3>
-                                @if(Session::has('error_message'))
-                                    <br>
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        {{-- <strong>Oopsy!</strong> Something is wrong. Please try again. --}}
-                                        <strong>Oopsy!</strong> {{ Session::get('error_message') }}.
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                @endif
-                                @if(Session::has('success_message'))
-                                    <br>
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        <strong>Bam!</strong> {{ Session::get('success_message') }}
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                @endif
-                                @if($errors->any())
-                                    <br>
-                                    <br>
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
@@ -105,6 +105,14 @@
                                                     <span class="input-group-text">Upload</span>
                                                 </div> --}}
                                             </div>
+                                            @if(!empty($categoryData->category_image))
+                                                &nbsp;&nbsp;&nbsp;
+                                                <div style="height: 100%; display: flex; align-items: center;">
+                                                    <img src="{{ asset('/images/category_images/small/' . $categoryData->category_image) }}" alt="Display Pic" width="150px;">
+                                                    &nbsp;&nbsp;&nbsp;
+                                                    <a href="{{ url('/admin/delete-category-image/' . $categoryData->id) }}"><button type="button" class="btn btn-danger" style="float: right;">Delete</button></a>
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <label>Description</label><span style="color: red;"> *</span>
@@ -127,6 +135,8 @@
                                                 var parent_id = @if(old('parent_id')) {{ old('parent_id') }} @else {{ $categoryData->parent_id }} @endif;
                                                 @if($title == "Edit Category")
                                                     var disable_id = {{ $getCategoryData->id }};
+                                                @else
+                                                    var disable_id = null;
                                                 @endif
                                             </script>
 
