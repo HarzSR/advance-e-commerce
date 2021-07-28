@@ -214,6 +214,8 @@ class CategoryController extends Controller
 
                 if($request->hasFile('image'))
                 {
+                    $this->deleteCategoryImage($id);
+
                     $image_tmp = $request->file('image');
                     if($image_tmp->isValid())
                     {
@@ -231,6 +233,10 @@ class CategoryController extends Controller
 
                         $category_image = $fileName;
                     }
+                }
+                else if(!empty($data['current_image']))
+                {
+                    $category_image = $data['current_image'];
                 }
                 else
                 {
@@ -308,6 +314,19 @@ class CategoryController extends Controller
         Category::where(['id' => $id])->update(['category_image' => '']);
 
         Session::flash('success_message', 'Product Image Removed Successfully');
+
+        return redirect()->back();
+    }
+
+    // Delete Category Function
+
+    public function deleteCategory($id = null)
+    {
+        $this->deleteCategoryImage($id);
+
+        Category::where('id', $id)->delete();
+
+        Session::flash('success_message', 'Category Removed Successfully');
 
         return redirect()->back();
     }

@@ -95,7 +95,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="image">File input</label><span style="color: red;"> *</span>
+                                            <label for="image">File input</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="image" name="image">
@@ -106,6 +106,7 @@
                                                 </div> --}}
                                             </div>
                                             @if(!empty($categoryData->category_image))
+                                                <input type="hidden" id="current_image" name="current_image" value="{{ $categoryData->category_image }}">
                                                 &nbsp;&nbsp;&nbsp;
                                                 <div style="height: 100%; display: flex; align-items: center;">
                                                     <img src="{{ asset('/images/category_images/small/' . $categoryData->category_image) }}" alt="Display Pic" width="150px;">
@@ -248,7 +249,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="image">File input</label><span style="color: red;"> *</span>
+                                            <label for="image">File input</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="image" name="image">
