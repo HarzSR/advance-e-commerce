@@ -31,5 +31,7 @@ ToDo List
 - Ajax failure message display
 - Add Category: Need Test
 - Edit Category fixing - Category dropdown issues (Remove self category)
+- Confirmation on Delete
+- Add SweetAlert
 
 Not ToDo List

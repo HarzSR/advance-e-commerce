@@ -182,6 +182,18 @@ $(document).ready(function (){
         $("#parent_id").attr('disabled','disabled');
     }
 
+    // Confirm on Delete
+    $(".confirmCategoryDelete").click(function(){
+        var name = $(this).attr('name');
+        if(confirm("Are you sure - To Delete " + name + "?"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    });
 });
 
 $(document).load(function () {

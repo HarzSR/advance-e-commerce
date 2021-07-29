@@ -81,7 +81,7 @@
                                             </td>
                                             <td>
                                                 <a href="{{ url('/admin/add-edit-category/' . $category->id) }}"><button type="button" class="btn btn-warning btn-sm">Edit</button></a>
-                                                <a href="{{ url('/admin/delete-category/' . $category->id) }}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
+                                                <a class="confirmCategoryDelete" name="Category {{ $category->id }} : {{ ucwords($category->section->name) }} - {{ ucwords($category->category_name) }}" href="{{ url('/admin/delete-category/' . $category->id) }}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
                                             </td>
                                         </tr>
                                     @endforeach
