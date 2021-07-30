@@ -23,15 +23,14 @@ Things done on this project
 - Update Section Status
 - Add Category
 - Add/Edit Category
+- Edit Category - update image will remove previous image before placing new one
 - Delete Category Image - Hard and Soft
-- Delete Category
+- Delete Category with SweetAlert (including removing Images)
 
 ToDo List
 - Sub Admin Login Issues
 - Ajax failure message display
 - Add Category: Need Test
 - Edit Category fixing - Category dropdown issues (Remove self category)
-- Confirmation on Delete
-- Add SweetAlert
 
 Not ToDo List

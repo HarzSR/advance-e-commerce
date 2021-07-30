@@ -118,6 +118,8 @@
         <script src="{{ url('/js/admin_js/pages/dashboard.js') }}"></script>
         <!-- Custom Script -->
         <script src="{{ url('/js/admin_js/admin_script.js') }}"></script>
+        <!-- Sweet Alert Script -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- DataTables  & Plugins -->
         <script src="{{ url('plugins/datatables/jquery.dataTables.min.js')  }}"></script>
         <script src="{{ url('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')  }}"></script>

@@ -48,7 +48,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title" style="margin-top: 5px;">Categories Data</h3>
-                                <a href="{{ url('/admin/add-edit-category/') }}"><button type="button" class="btn btn-primary btn-sm" style="float: right; display: inline-block;">Add/Edit Category</button></a>
+                                <a href="{{ url('/admin/add-edit-category/') }}"><button type="button" class="btn btn-primary btn-sm" style="float: right; display: inline-block;">Add Category</button></a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -81,7 +81,8 @@
                                             </td>
                                             <td>
                                                 <a href="{{ url('/admin/add-edit-category/' . $category->id) }}"><button type="button" class="btn btn-warning btn-sm">Edit</button></a>
-                                                <a class="confirmCategoryDelete" name="Category {{ $category->id }} : {{ ucwords($category->section->name) }} - {{ ucwords($category->category_name) }}" href="{{ url('/admin/delete-category/' . $category->id) }}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
+                                                {{-- <a class="confirmCategoryDelete" name="Category {{ $category->id }} : {{ ucwords($category->section->name) }} - {{ ucwords($category->category_name) }}" href="{{ url('/admin/delete-category/' . $category->id) }}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a> --}}
+                                                <a href="javascript:void(0)" class="confirmDelete" record="Category" recordid="{{ $category->id }} : {{ ucwords($category->section->name) }} - {{ ucwords($category->category_name) }}" dataName="category" dataId="{{ $category->id }}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
                                             </td>
                                         </tr>
                                     @endforeach

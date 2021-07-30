@@ -119,70 +119,74 @@ $(document).ready(function (){
         });
     });
 
-    $("#parent_id").attr('disabled','disabled');
-
-    $("#section_id").change(function () {
-        var section_id = $(this).val();
-        $.ajax({
-            type: 'post',
-            data: {
-                section_id: section_id
-            },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: '/admin/append-categories-level',
-            success: function (response)
-            {
-                // console.log(response);
-                $("#parent_id").removeAttr('disabled');
-                $("#append_categories_level").html(response);
-            },
-            error: function (response)
-            {
-                // console.log("Error : " + response);
-            }
-        });
-    });
-
-    // On Page Load check for Section ID and Old
-    var section_id = $("#section_id").val();
-    if(section_id != '' && section_id != 0)
-    {
-        $.ajax({
-            type: 'post',
-            data: {
-                section_id: section_id
-            },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: '/admin/append-categories-level',
-            success: function (response)
-            {
-                // console.log(response);
-                $("#append_categories_level").html(response);
-                if(section_id == 0)
-                {
-                    $("#parent_id").attr('disabled','disabled');
-                }
-                else
-                {
-                    $("#append_categories_level option[value=" + parent_id + "]").attr('selected','selected');
-                }
-            },
-            error: function (response)
-            {
-                // console.log("Error : " + response);
-            }
-        });
-    }
-    else if(section_id == 0 || section_id == null)
+    if(document.getElementById("parent_id") != null)
     {
         $("#parent_id").attr('disabled','disabled');
+
+        $("#section_id").change(function () {
+            var section_id = $(this).val();
+            $.ajax({
+                type: 'post',
+                data: {
+                    section_id: section_id
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: '/admin/append-categories-level',
+                success: function (response)
+                {
+                    // console.log(response);
+                    $("#parent_id").removeAttr('disabled');
+                    $("#append_categories_level").html(response);
+                },
+                error: function (response)
+                {
+                    // console.log("Error : " + response);
+                }
+            });
+        });
+
+        // On Page Load check for Section ID and Old
+        var section_id = $("#section_id").val();
+        if(section_id != '' && section_id != 0)
+        {
+            $.ajax({
+                type: 'post',
+                data: {
+                    section_id: section_id
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: '/admin/append-categories-level',
+                success: function (response)
+                {
+                    // console.log(response);
+                    $("#append_categories_level").html(response);
+                    if(section_id == 0)
+                    {
+                        $("#parent_id").attr('disabled','disabled');
+                    }
+                    else
+                    {
+                        $("#append_categories_level option[value=" + parent_id + "]").attr('selected','selected');
+                    }
+                },
+                error: function (response)
+                {
+                    // console.log("Error : " + response);
+                }
+            });
+        }
+        else if(section_id == 0 || section_id == null)
+        {
+            $("#parent_id").attr('disabled','disabled');
+        }
     }
 
     // Confirm on Delete
+    /*
     $(".confirmCategoryDelete").click(function(){
         var name = $(this).attr('name');
         if(confirm("Are you sure - To Delete " + name + "?"))
@@ -193,6 +197,34 @@ $(document).ready(function (){
         {
             return false;
         }
+    });
+    */
+
+    // Sweet Alert JS
+    $(".confirmDelete").click(function(){
+        var record = $(this).attr('record');
+        var recordid = $(this).attr('recordid');
+        var dataName = $(this).attr('dataName');
+        var dataId = $(this).attr('dataId');
+        Swal.fire({
+            title: 'Requesting Confirmation',
+            text: 'Do you want to Delete ' + record + ' with ID : ' + recordid,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085D6',
+            cancelButtonColor: '#D33',
+            confirmButtonText: 'Yes, Delete it',
+            focusCancel: true,
+        }).then((result) => {
+            if(result.value){
+                Swal.fire(
+                    'Deleted',
+                    record + ' with ' + recordid + ' Deleted Successfully',
+                    'success'
+                )
+                window.location.href="/admin/delete-" + dataName + "/" + dataId;
+            }
+        });
     });
 });
 

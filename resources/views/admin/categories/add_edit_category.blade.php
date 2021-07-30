@@ -111,7 +111,7 @@
                                                 <div style="height: 100%; display: flex; align-items: center;">
                                                     <img src="{{ asset('/images/category_images/small/' . $categoryData->category_image) }}" alt="Display Pic" width="150px;">
                                                     &nbsp;&nbsp;&nbsp;
-                                                    <a href="{{ url('/admin/delete-category-image/' . $categoryData->id) }}"><button type="button" class="btn btn-danger" style="float: right;">Delete</button></a>
+                                                    <a href="javascript:void(0)" class="confirmDelete" record="Category Image" recordid="{{ $categoryData->id }} : {{ ucwords($categoryData->section->name) }} - {{ ucwords($categoryData->category_name) }}" dataName="category-image" dataId="{{ $categoryData->id }}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
                                                 </div>
                                             @endif
                                         </div>
