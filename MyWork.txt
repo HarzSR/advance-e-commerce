@@ -26,6 +26,7 @@ Things done on this project
 - Edit Category - update image will remove previous image before placing new one
 - Delete Category Image - Hard and Soft
 - Delete Category with SweetAlert (including removing Images)
+- Add Product
 
 ToDo List
 - Sub Admin Login Issues
