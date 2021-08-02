@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    // Categories Function
+    // View Categories Function
 
     public function viewCategories()
     {

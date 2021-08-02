@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class SectionController extends Controller
 {
-    // Sections Function
+    // View Sections Function
 
     public function viewSections()
     {

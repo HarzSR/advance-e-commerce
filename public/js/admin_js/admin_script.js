@@ -119,6 +119,41 @@ $(document).ready(function (){
         });
     });
 
+    $(".updateProductStatus").click(function (){
+        var status = $(this).text();
+        var product_id = $(this).attr("product_id");
+        $("#ajaxStatus-" + product_id).html("Loading...");
+        $.ajax({
+            type: 'post',
+            data: {
+                status: status,
+                product_id: product_id,
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/admin/update-product-status',
+            success: function (response)
+            {
+                // console.log(response);
+                if(response['status'] == 0)
+                {
+                    $("#product-" + product_id).html("<a class=\"updateProductStatus\" id=\"product-{{ " + product_id + " }}\" product_id=\"{{ " + product_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-danger btn-sm\" style=\"pointer-events: none;\">Inactive</button></a>");
+                    $("#ajaxStatus" + product_id).html("");
+                }
+                else if(response['status'] == 1)
+                {
+                    $("#product-" + product_id).html("<a class=\"updateProductStatus\" id=\"product-{{ " + product_id + " }}\" product_id=\"{{ " + product_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-success btn-sm\" style=\"pointer-events: none;\">Active</button></a>");
+                    $("#ajaxStatus" + product_id).html("");
+                }
+            },
+            error: function (response)
+            {
+                // console.log("Error : " + response);
+            }
+        });
+    });
+
     if(document.getElementById("parent_id") != null)
     {
         $("#parent_id").attr('disabled','disabled');
