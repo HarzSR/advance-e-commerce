@@ -41,4 +41,15 @@ class ProductController extends Controller
             return response()->json(['status' => $status, 'product_id' => $data['product_id']]);
         }
     }
+
+    // Delete Product Function
+
+    public function deleteProduct($id = null)
+    {
+        Product::where('id', $id)->delete();
+
+        Session::flash('success_message', 'Product Removed Successfully');
+
+        return redirect()->back();
+    }
 }

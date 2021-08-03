@@ -89,6 +89,23 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item @if(Session::get('page') == "view-products") menu-open @endif">
+                        <a href="#" class="nav-link @if(Session::get('page') == "view-products") active @endif">
+                            <i class="nav-icon fas fa-box"></i>
+                            <p>
+                                Product
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ url('/admin/view-products') }}" class="nav-link @if(Session::get('page') == "view-products") active @endif">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>View Products</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

@@ -29,6 +29,7 @@ Things done on this project
 - Delete Category with SweetAlert (including removing Images)
 - Add Product
 - View Product
+- Delete Product
 
 ToDo List
 - Sub Admin Login Issues
