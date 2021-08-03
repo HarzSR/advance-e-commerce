@@ -59,6 +59,8 @@
                                             <th>Product Name</th>
                                             <th>Product Code</th>
                                             <th>Product Color</th>
+                                            <th>Product Section</th>
+                                            <th>Product Category</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -70,6 +72,8 @@
                                                 <td>{{ ucwords($product->product_name) }}</td>
                                                 <td>{{ ucwords($product->product_code) }}</td>
                                                 <td>{{ ucwords($product->product_color) }}</td>
+                                                <td>{{ ucwords($product->section->name) }}</td>
+                                                <td>{{ ucwords($product->category->category_name) }}</td>
                                                 <td>
                                                     @if($product->status == 1)
                                                         <a class="updateProductStatus" id="product-{{ $product->id }}" product_id="{{ $product->id }}" href="javascript:void(0)"><button type="button" class="btn btn-success btn-sm" style="pointer-events: none;">Active</button><span id="ajaxStatus-{{ $product->id }}" class="ajaxStatus-{{ $product->id }}"></span></a>
@@ -90,6 +94,8 @@
                                             <th>Product Name</th>
                                             <th>Product Code</th>
                                             <th>Product Color</th>
+                                            <th>Product Section</th>
+                                            <th>Product Category</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>

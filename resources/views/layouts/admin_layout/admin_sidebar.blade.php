@@ -66,7 +66,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item @if(Session::get('page') == "view-sections" || Session::get('page') == "view-categories" || Session::get('page') == "add-edit-category") menu-open @endif">
+                    <li class="nav-item @if(Session::get('page') == "view-sections" || Session::get('page') == "view-categories" || Session::get('page') == "add-edit-category" || Session::get('page') == "view-products") menu-open @endif">
                         <a href="#" class="nav-link @if(Session::get('page') == "view-sections" || Session::get('page') == "edit-sections") active @endif">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>
@@ -87,17 +87,6 @@
                                     <p>Categories</p>
                                 </a>
                             </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item @if(Session::get('page') == "view-products") menu-open @endif">
-                        <a href="#" class="nav-link @if(Session::get('page') == "view-products") active @endif">
-                            <i class="nav-icon fas fa-box"></i>
-                            <p>
-                                Product
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ url('/admin/view-products') }}" class="nav-link @if(Session::get('page') == "view-products") active @endif">
                                     <i class="far fa-circle nav-icon"></i>

@@ -14,7 +14,11 @@ class ProductController extends Controller
     public function viewProducts()
     {
         Session::put('page', 'view-products');
-        $products = Product::get();
+        $products = Product::with(['category' => function($query) {
+            $query->select('id', 'category_name');
+        }, 'section' => function($query) {
+            $query->select('id', 'name');
+        }])->get();
 
         return view('admin.products.view_products')->with(compact('products'));
     }
