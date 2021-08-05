@@ -46,6 +46,21 @@ class ProductController extends Controller
         }
     }
 
+    // Add/Edit Product Function
+
+    public function addEditProduct(Request $request, $id = null)
+    {
+        Session::put('page', 'add-edit-product');
+        if($id == null)
+        {
+            $title = "Add Product";
+        }
+        else
+        {
+            $title = "Edit Product";
+        }
+    }
+
     // Delete Product Function
 
     public function deleteProduct($id = null)
