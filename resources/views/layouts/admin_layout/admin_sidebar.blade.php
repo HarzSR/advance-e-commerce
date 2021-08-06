@@ -90,7 +90,7 @@
                             <li class="nav-item">
                                 <a href="{{ url('/admin/view-products') }}" class="nav-link @if(Session::get('page') == "view-products") active @endif">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>View Products</p>
+                                    <p>Products</p>
                                 </a>
                             </li>
                         </ul>

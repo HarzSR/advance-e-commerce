@@ -59,6 +59,8 @@ class ProductController extends Controller
         {
             $title = "Edit Product";
         }
+
+        return view('admin.products.add_edit_product')->with(compact('title'));
     }
 
     // Delete Product Function
