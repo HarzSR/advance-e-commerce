@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Fabric;
+use App\Fit;
 use App\Http\Controllers\Controller;
+use App\Occasion;
+use App\Pattern;
 use App\Product;
+use App\Sleeve;
 use Illuminate\Http\Request;
 use Session;
 
@@ -60,7 +65,13 @@ class ProductController extends Controller
             $title = "Edit Product";
         }
 
-        return view('admin.products.add_edit_product')->with(compact('title'));
+        $fabricArray = Fabric::get();
+        $sleeveArray = Sleeve::get();
+        $patternArray = Pattern::get();
+        $fitArray = Fit::get();
+        $occasionArray = Occasion::get();
+
+        return view('admin.products.add_edit_product')->with(compact('title', 'fabricArray', 'sleeveArray', 'patternArray', 'fitArray', 'occasionArray'));
     }
 
     // Delete Product Function

@@ -22,8 +22,6 @@ class SectionsTableSeeder extends Seeder
             ['name' => 'Kids', 'status' => 1],
         ];
 
-        // Section::insert($sectionRecords);
-
         foreach ($sectionRecords as $key => $record)
         {
             Section::create($record);

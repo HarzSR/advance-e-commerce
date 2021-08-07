@@ -61,11 +61,12 @@
                         @csrf
                         <div class="card card-default">
                             <div class="card-header">
-                                <h3 class="card-title">{{ ucwords($title) }}</h3>
+                                <h3 class="card-title" style="margin-top: 9px;">{{ ucwords($title) }}</h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
                                     </button>
+                                    <a href="{{ url('/admin/view-categories') }}"><button type="button" class="btn btn-primary">View Categories</button></a>
                                     {{-- <button type="button" class="btn btn-tool" data-card-widget="remove">
                                         <i class="fas fa-times"></i>
                                     </button> --}}
@@ -185,7 +186,7 @@
                         @csrf
                         <div class="card card-default">
                             <div class="card-header">
-                                <h3 class="card-title">{{ ucwords($title) }}</h3>
+                                <h3 class="card-title" style="margin-top: 9px;">{{ ucwords($title) }}</h3>
                                 @if(Session::has('error_message'))
                                     <br>
                                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -220,6 +221,7 @@
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
                                     </button>
+                                    <a href="{{ url('/admin/view-categories') }}"><button type="button" class="btn btn-primary">View Categories</button></a>
                                     {{-- <button type="button" class="btn btn-tool" data-card-widget="remove">
                                         <i class="fas fa-times"></i>
                                     </button> --}}
@@ -249,7 +251,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="image">File input</label>
+                                            <label for="image">Category Image</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="image" name="image">

@@ -65,11 +65,11 @@
             <section class="content">
                 <div class="container-fluid">
                     <!-- SELECT2 EXAMPLE -->
-                    <form action="{{ url('/admin/add-edit-product') }}" method="post" enctype="multipart/form-data" id="categoryForm" name="categoryForm">
+                    <form action="{{ url('/admin/add-edit-product') }}" method="post" enctype="multipart/form-data" id="productForm" name="productForm">
                         @csrf
                         <div class="card card-default">
                             <div class="card-header">
-                                <h3 class="card-title">{{ ucwords($title) }}</h3>
+                                <h3 class="card-title" style="margin-top: 9px;">{{ ucwords($title) }}</h3>
                                 @if(Session::has('error_message'))
                                     <br>
                                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -104,6 +104,7 @@
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
                                     </button>
+                                    <a href="{{ url('/admin/view-categories') }}"><button type="button" class="btn btn-primary">View Products</button></a>
                                 </div>
                             </div>
                             <!-- /.card-header -->
@@ -111,19 +112,28 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Category Name</label><span style="color: red;"> *</span>
-                                            <input type="text" class="form-control" id="category_name" name="category_name" value="{{ old('category_name') }}" placeholder="Enter Category Name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Section</label><span style="color: red;"> *</span>
-                                            <select class="form-control select2" id="section_id" name="section_id" style="width: 100%;">
+                                            <label>Select Category</label><span style="color: red;"> *</span>
+                                            <select class="form-control select2" id="category_id" name="category_id" style="width: 100%;">
+                                                <option value="">Select</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="image">File input</label>
+                                            <label for="exampleInputEmail1">Product Name</label><span style="color: red;"> *</span>
+                                            <input type="text" class="form-control" id="product_name" name="product_name" value="{{ old('product_name') }}" placeholder="Enter Product Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Product Code</label><span style="color: red;"> *</span>
+                                            <input type="text" class="form-control" id="product_code" name="product_code" value="{{ old('product_code') }}" placeholder="Enter Product Code">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Product Color</label><span style="color: red;"> *</span>
+                                            <input type="text" class="form-control" id="product_color" name="product_color" value="{{ old('product_color') }}" placeholder="Enter Product Color">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="image">Product Image</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="image" name="image">
+                                                    <input type="file" class="custom-file-input" id="main_image" name="main_image">
                                                     <label class="custom-file-label" for="image">Choose file</label>
                                                 </div>
                                             </div>
@@ -141,12 +151,31 @@
                                     <!-- /.col -->
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Category URL</label><span style="color: red;"> *</span>
-                                            <input type="text" class="form-control" id="category_url" name="category_url" value="{{ old('category_url') }}" placeholder="Enter Category URL">
+                                            <label>Select Section</label><span style="color: red;"> *</span>
+                                            <select class="form-control select2" id="section_id" name="section_id" style="width: 100%;">
+                                                <option value="">Select</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Category Discount</label><span style="color: red;"> *</span>
-                                            <input type="text" class="form-control" id="category_discount" value="{{ old('category_discount') }}" name="category_discount" placeholder="Enter Category Discount">
+                                            <label for="exampleInputEmail1">Product Weight</label><span style="color: red;"> *</span>
+                                            <input type="text" class="form-control" id="product_weight" name="product_weight" value="{{ old('product_weight') }}" placeholder="Enter Product Weight">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Product Price</label><span style="color: red;"> *</span>
+                                            <input type="text" class="form-control" id="product_price" name="product_price" value="{{ old('product_price') }}" placeholder="Enter Product Price">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Product Discount</label><span style="color: red;"> *</span>
+                                            <input type="text" class="form-control" id="product_discount" value="{{ old('product_discount') }}" name="product_discount" placeholder="Enter Product Discount">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="image">Product Video</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="product_video" name="product_video">
+                                                    <label class="custom-file-label" for="image">Choose file</label>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label>Meta Title</label>
