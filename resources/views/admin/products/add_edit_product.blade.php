@@ -115,6 +115,9 @@
                                             <label>Select Category</label><span style="color: red;"> *</span>
                                             <select class="form-control select2" id="category_id" name="category_id" style="width: 100%;">
                                                 <option value="">Select</option>
+                                                @foreach($sectionArray as $section)
+                                                    <option value="{{ $section->id }}">{{ $section->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -154,6 +157,13 @@
                                             <label>Select Section</label><span style="color: red;"> *</span>
                                             <select class="form-control select2" id="section_id" name="section_id" style="width: 100%;">
                                                 <option value="">Select</option>
+                                                @foreach($categoryArray as $category)
+                                                    @if($category->parent_id != 0)
+                                                        <option value="{{ $category->id }}">-- {{ $category->category_name }}</option>
+                                                    @else
+                                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                                    @endif
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
