@@ -142,6 +142,24 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
+                                            <label>Select Fabric</label><span style="color: red;"> *</span>
+                                            <select class="form-control select2" id="fabric_id" name="fabric_id" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                @foreach($fabricArray as $fabric)
+                                                    <option value="{{ $fabric->id }}">{{ $fabric->description }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Select Sleeve</label><span style="color: red;"> *</span>
+                                            <select class="form-control select2" id="sleeve_id" name="sleeve_id" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                @foreach($sleeveArray as $sleeve)
+                                                    <option value="{{ $sleeve->id }}">{{ $sleeve->description }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label>Description</label><span style="color: red;"> *</span>
                                             <textarea class="form-control" id="category_description" name="category_description" rows="3" placeholder="Enter Category Description ...">{{ old('category_description') }}</textarea>
                                         </div>
@@ -186,6 +204,24 @@
                                                     <label class="custom-file-label" for="image">Choose file</label>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Select Pattern</label><span style="color: red;"> *</span>
+                                            <select class="form-control select2" id="pattern_id" name="pattern_id" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                @foreach($patternArray as $pattern)
+                                                    <option value="{{ $pattern->id }}">{{ $pattern->description }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Select Fit</label><span style="color: red;"> *</span>
+                                            <select class="form-control select2" id="fit_id" name="fit_id" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                @foreach($fitArray as $fit)
+                                                    <option value="{{ $fit->id }}">{{ $fit->description }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label>Meta Title</label>
