@@ -224,6 +224,15 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
+                                            <label>Select Occasion</label><span style="color: red;"> *</span>
+                                            <select class="form-control select2" id="occasion" name="occasion" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                @foreach($occasionArray as $occasion)
+                                                    <option value="{{ $occasion->id }}">{{ $occasion->description }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label>Meta Title</label>
                                             <textarea class="form-control" id="meta_title" name="meta_title" rows="3" placeholder="Enter Meta Title ...">{{ old('meta_title') }}</textarea>
                                         </div>
