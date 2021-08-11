@@ -20,6 +20,8 @@ class Category extends Model
         return $this->belongsTo('App\Section', 'section_id')->select('id', 'name');
     }
 
+    //
+
     public function parentCategory()
     {
         return $this->belongsTo('App\Category', 'parent_id')->select('id', 'category_name');

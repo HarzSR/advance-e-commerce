@@ -75,7 +75,9 @@ class ProductController extends Controller
         $fitArray = Fit::get();
         $occasionArray = Occasion::get();
 
-        return view('admin.products.add_edit_product')->with(compact('title', 'sectionArray', 'categoryArray', 'fabricArray', 'sleeveArray', 'patternArray', 'fitArray', 'occasionArray'));
+        $categories = Section::with('categories')->get();
+
+        return view('admin.products.add_edit_product')->with(compact('title', 'categories', 'sectionArray', 'categoryArray', 'fabricArray', 'sleeveArray', 'patternArray', 'fitArray', 'occasionArray'));
     }
 
     // Delete Product Function

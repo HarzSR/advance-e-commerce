@@ -112,8 +112,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Select Category</label><span style="color: red;"> *</span>
-                                            <select class="form-control select2" id="category_id" name="category_id" style="width: 100%;">
+                                            <label>Select Section</label><span style="color: red;"> *</span>
+                                            <select class="form-control select2" id="section_id" name="section_id" style="width: 100%;">
                                                 <option value="">Select</option>
                                                 @foreach($sectionArray as $section)
                                                     <option value="{{ $section->id }}">{{ $section->name }}</option>
@@ -160,6 +160,15 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
+                                            <label>Select Occasion</label><span style="color: red;"> *</span>
+                                            <select class="form-control select2" id="occasion" name="occasion" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                @foreach($occasionArray as $occasion)
+                                                    <option value="{{ $occasion->id }}">{{ $occasion->description }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label>Description</label><span style="color: red;"> *</span>
                                             <textarea class="form-control" id="category_description" name="category_description" rows="3" placeholder="Enter Category Description ...">{{ old('category_description') }}</textarea>
                                         </div>
@@ -172,15 +181,17 @@
                                     <!-- /.col -->
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Select Section</label><span style="color: red;"> *</span>
-                                            <select class="form-control select2" id="section_id" name="section_id" style="width: 100%;">
+                                            <label>Select Category</label><span style="color: red;"> *</span>
+                                            <select class="form-control select2" id="category_id" name="category_id" style="width: 100%;">
                                                 <option value="">Select</option>
-                                                @foreach($categoryArray as $category)
-                                                    @if($category->parent_id != 0)
-                                                        <option value="{{ $category->id }}">-- {{ $category->category_name }}</option>
-                                                    @else
-                                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                                                    @endif
+                                                @foreach($categories as $section)
+                                                    <optgroup label="{{ $section->name }}"></optgroup>
+                                                    @foreach($section->categories as $category)
+                                                        <option value="{{ $category->id }}">&nbsp;&nbsp;&nbsp;&nbsp; {{ $category->category_name }}</option>
+                                                        @foreach($category->subcategories as $subcategory)
+                                                            <option value="{{ $subcategory->id }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $subcategory->category_name }}</option>
+                                                        @endforeach
+                                                    @endforeach
                                                 @endforeach
                                             </select>
                                         </div>
@@ -224,13 +235,8 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>Select Occasion</label><span style="color: red;"> *</span>
-                                            <select class="form-control select2" id="occasion" name="occasion" style="width: 100%;">
-                                                <option value="">Select</option>
-                                                @foreach($occasionArray as $occasion)
-                                                    <option value="{{ $occasion->id }}">{{ $occasion->description }}</option>
-                                                @endforeach
-                                            </select>
+                                            <label>Wash Care</label><span style="color: red;"> *</span>
+                                            <textarea class="form-control" id="wash_care" name="wash_care" rows="1" placeholder="Enter Wash Care ...">{{ old('category_description') }}</textarea>
                                         </div>
                                         <div class="form-group">
                                             <label>Meta Title</label>
@@ -249,8 +255,10 @@
                             <!-- /.card-body -->
                             <div class="card-footer">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="status" name="status" @if(!empty(old('status'))) checked @endif value="1" style="margin-top: 15px;">
-                                    <label class="form-check-label" for="status" style="margin-top: 9px;">Status</label>
+                                    <input type="checkbox" class="form-check-input" id="is_featured" name="is_featured" @if(!empty(old('is_featured'))) checked @endif value="1" style="margin-top: 15px;">
+                                    <label class="form-check-label" for="status" style="margin-top: 9px;">Is Featured</label>
+                                    <input type="checkbox" class="form-check-input" id="status" name="status" @if(!empty(old('status'))) checked @endif value="1" style="margin-top: 15px; margin-left: 20px;">
+                                    <label class="form-check-label" for="status" style="margin-top: 9px; margin-left: 40px;">Status</label>
                                     <button type="submit" class="btn btn-primary" style="float: right; display: inline-block">Submit</button>
                                 </div>
                             </div>
