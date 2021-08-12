@@ -13,6 +13,7 @@ use App\Section;
 use App\Sleeve;
 use Illuminate\Http\Request;
 use Session;
+use Validator;
 
 class ProductController extends Controller
 {
@@ -61,14 +62,38 @@ class ProductController extends Controller
         if($id == null)
         {
             $title = "Add Product";
+
+            if($request->isMethod('POST'))
+            {
+                $data = $request->all();
+
+                dd($data);
+
+                $validator = Validator::make($request->all(), [
+                        'category_name' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        'section_id' => 'required',
+                        'image' => 'sometimes|mimes:jpeg,png,jpg',
+                        'category_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        // 'meta_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        'category_url' => 'required|regex:/^([a-z0-9]+-)*[a-z0-9]+$/i|max:255',
+                        'parent_id' => 'required|numeric',
+                        'category_discount' => 'required|numeric|between:0,99.99',
+                        // 'meta_title' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        // 'meta_keywords' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                    ]
+                );
+
+                if ($validator->fails())
+                {
+                    return redirect()->back()->withErrors($validator)->withInput($request->input());
+                }
+            }
         }
         else
         {
             $title = "Edit Product";
         }
 
-        $sectionArray = Section::get();
-        $categoryArray = Category::get();
         $fabricArray = Fabric::get();
         $sleeveArray = Sleeve::get();
         $patternArray = Pattern::get();
@@ -77,7 +102,7 @@ class ProductController extends Controller
 
         $categories = Section::with('categories')->get();
 
-        return view('admin.products.add_edit_product')->with(compact('title', 'categories', 'sectionArray', 'categoryArray', 'fabricArray', 'sleeveArray', 'patternArray', 'fitArray', 'occasionArray'));
+        return view('admin.products.add_edit_product')->with(compact('title', 'categories', 'fabricArray', 'sleeveArray', 'patternArray', 'fitArray', 'occasionArray'));
     }
 
     // Delete Product Function
