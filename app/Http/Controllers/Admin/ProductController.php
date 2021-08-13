@@ -67,17 +67,24 @@ class ProductController extends Controller
             {
                 $data = $request->all();
 
-                dd($data);
-
                 $validator = Validator::make($request->all(), [
-                        'category_name' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
-                        'section_id' => 'required',
-                        'image' => 'sometimes|mimes:jpeg,png,jpg',
+                        'category_id' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        'product_name' => 'required',
+                        'product_code' => 'required',
+                        'product_color' => 'required',
+                        'fabric_id' => 'required',
+                        'sleeve_id' => 'required',
+                        'wash_care' => 'required',
+                        'occasion' => 'required',
+                        'product_weight' => 'required',
+                        'product_price' => 'required|numeric|between:0,99.99',
+                        'product_discount' => 'required',
+                        'pattern_id' => 'required',
+                        'fit_id' => 'required',
+                        'main_image' => 'sometimes|mimes:jpeg,png,jpg',
+                        'product_video' => 'sometimes|mimes:jpeg,png,jpg',
                         'category_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
                         // 'meta_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
-                        'category_url' => 'required|regex:/^([a-z0-9]+-)*[a-z0-9]+$/i|max:255',
-                        'parent_id' => 'required|numeric',
-                        'category_discount' => 'required|numeric|between:0,99.99',
                         // 'meta_title' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
                         // 'meta_keywords' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
                     ]
