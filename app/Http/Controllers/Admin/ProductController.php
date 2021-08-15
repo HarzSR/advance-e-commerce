@@ -69,9 +69,9 @@ class ProductController extends Controller
 
                 $validator = Validator::make($request->all(), [
                         'category_id' => 'required|integer',
-                        'product_name' => 'required|regex:/^[A-Za-z0-9_.]+$/|max:255',
+                        'product_name' => 'required|regex:/(^[A-Za-z0-9 ]+$)+/|max:255',
                         'product_code' => 'required|alpha_num',
-                        'product_color' => 'required',
+                        'product_color' => 'required|regex:/(^[A-Za-z ]+$)+/',
                         'fabric_id' => 'required',
                         'sleeve_id' => 'required',
                         'wash_care' => 'required',

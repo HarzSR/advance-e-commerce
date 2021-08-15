@@ -88,9 +88,9 @@
                                                 @foreach($categories as $section)
                                                     <optgroup label="{{ $section->name }}"></optgroup>
                                                     @foreach($section->categories as $category)
-                                                        <option value="{{ $category->id }}">&nbsp;&nbsp;&nbsp;&nbsp; {{ $category->category_name }}</option>
+                                                        <option value="{{ $category->id }}" @if(!empty(old('category_id')) && $category->id == old('category_id')) selected @endif>&nbsp;&nbsp;&nbsp;&nbsp; {{ $category->category_name }} - {{ $section->name }}</option>
                                                         @foreach($category->subcategories as $subcategory)
-                                                            <option value="{{ $subcategory->id }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $subcategory->category_name }}</option>
+                                                            <option value="{{ $subcategory->id }}" @if(!empty(old('category_id')) && $subcategory->id == old('category_id')) selected @endif>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $subcategory->category_name }} - {{ $section->name }}</option>
                                                         @endforeach
                                                     @endforeach
                                                 @endforeach
@@ -122,7 +122,7 @@
                                             <select class="form-control select2" id="fabric_id" name="fabric_id" style="width: 100%;">
                                                 <option value="">Select</option>
                                                 @foreach($fabricArray as $fabric)
-                                                    <option value="{{ $fabric->id }}">{{ $fabric->description }}</option>
+                                                    <option value="{{ $fabric->id }}" @if(!empty(old('fabric_id')) && $fabric->id == old('fabric_id')) selected @endif>{{ $fabric->description }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -131,7 +131,7 @@
                                             <select class="form-control select2" id="sleeve_id" name="sleeve_id" style="width: 100%;">
                                                 <option value="">Select</option>
                                                 @foreach($sleeveArray as $sleeve)
-                                                    <option value="{{ $sleeve->id }}">{{ $sleeve->description }}</option>
+                                                    <option value="{{ $sleeve->id }}" @if(!empty(old('sleeve_id')) && $sleeve->id == old('sleeve_id')) selected @endif >{{ $sleeve->description }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -156,7 +156,7 @@
                                             <select class="form-control select2" id="occasion" name="occasion" style="width: 100%;">
                                                 <option value="">Select</option>
                                                 @foreach($occasionArray as $occasion)
-                                                    <option value="{{ $occasion->id }}">{{ $occasion->description }}</option>
+                                                    <option value="{{ $occasion->id }}" @if(!empty(old('occasion')) && $occasion->id == old('occasion')) selected @endif>{{ $occasion->description }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -186,7 +186,7 @@
                                             <select class="form-control select2" id="pattern_id" name="pattern_id" style="width: 100%;">
                                                 <option value="">Select</option>
                                                 @foreach($patternArray as $pattern)
-                                                    <option value="{{ $pattern->id }}">{{ $pattern->description }}</option>
+                                                    <option value="{{ $pattern->id }}" @if(!empty(old('pattern_id')) && $pattern->id == old('pattern_id')) selected @endif>{{ $pattern->description }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -195,7 +195,7 @@
                                             <select class="form-control select2" id="fit_id" name="fit_id" style="width: 100%;">
                                                 <option value="">Select</option>
                                                 @foreach($fitArray as $fit)
-                                                    <option value="{{ $fit->id }}">{{ $fit->description }}</option>
+                                                    <option value="{{ $fit->id }}" @if(!empty(old('fit_id')) && $fit->id == old('fit_id')) selected @endif>{{ $fit->description }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
