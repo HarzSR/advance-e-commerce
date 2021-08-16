@@ -74,16 +74,16 @@ class ProductController extends Controller
                         'product_color' => 'required|regex:/(^[A-Za-z ]+$)+/',
                         'fabric_id' => 'required',
                         'sleeve_id' => 'required',
-                        'wash_care' => 'required',
+                        'wash_care' => 'required|string|min:1|max:1000',
                         'occasion' => 'required',
-                        'product_weight' => 'required',
-                        'product_price' => 'required|numeric|between:0,99.99',
-                        'product_discount' => 'required',
+                        'product_weight' => 'required|numeric|between:0,99.99',
+                        'product_price' => 'required|numeric',
+                        'product_discount' => 'required|numeric|between:0,99.99',
                         'pattern_id' => 'required',
                         'fit_id' => 'required',
                         'main_image' => 'sometimes|mimes:jpeg,png,jpg',
                         'product_video' => 'sometimes|mimes:jpeg,png,jpg',
-                        'category_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        'category_description' => 'required|string|min:1|max:1000',
                         // 'meta_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
                         // 'meta_title' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
                         // 'meta_keywords' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
@@ -94,6 +94,8 @@ class ProductController extends Controller
                 {
                     return redirect()->back()->withErrors($validator)->withInput($request->input());
                 }
+
+                $product = new Product;
             }
         }
         else
