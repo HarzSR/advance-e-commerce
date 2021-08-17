@@ -169,7 +169,7 @@
                                             <input type="text" class="form-control" id="product_price" name="product_price" value="{{ old('product_price') }}" placeholder="Enter Product Price">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Product Discount</label><span style="color: red;"> *</span>
+                                            <label for="exampleInputEmail1">Product Discount (%)</label><span style="color: red;"> *</span>
                                             <input type="text" class="form-control" id="product_discount" value="{{ old('product_discount') }}" name="product_discount" placeholder="Enter Product Discount">
                                         </div>
                                         <div class="form-group">

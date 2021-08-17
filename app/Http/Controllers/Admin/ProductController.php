@@ -95,7 +95,12 @@ class ProductController extends Controller
                     return redirect()->back()->withErrors($validator)->withInput($request->input());
                 }
 
+                $categoryDetails = Category::find($data['category_id']);
+
                 $product = new Product;
+
+                $product->section_id = $categoryDetails->section_id;
+                $product->category_id = $data['category_id'];
             }
         }
         else
