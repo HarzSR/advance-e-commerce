@@ -99,8 +99,65 @@ class ProductController extends Controller
 
                 $product = new Product;
 
-                $product->section_id = $categoryDetails->section_id;
                 $product->category_id = $data['category_id'];
+                $product->section_id = $categoryDetails->section_id;
+                $product->product_name = $data['product_name'];
+                $product->product_code = $data['product_code'];
+                $product->product_color = $data['product_color'];
+                $product->product_price = $data['product_price'];
+                $product->product_discount = $data['product_discount'];
+                $product->product_weight = $data['product_weight'];
+                $product->description = $data['category_description'];
+                $product->wash_care = $data['wash_care'];
+                $product->fabric = $data['fabric_id'];
+                $product->pattern = $data['pattern_id'];
+                $product->sleeve = $data['sleeve_id'];
+                $product->fit = $data['fit_id'];
+                $product->occasion = $data['occasion'];
+
+                if(!empty($data['meta_title']))
+                {
+                    $product->meta_title = $data['meta_title'];
+                }
+                else
+                {
+                    $product->meta_title = '';
+                }
+                if(!empty($data['meta_description']))
+                {
+                    $product->meta_description = $data['meta_description'];
+                }
+                else
+                {
+                    $product->meta_description = '';
+                }
+                if(!empty($data['meta_keywords']))
+                {
+                    $product->meta_keywords = $data['meta_keywords'];
+                }
+                else
+                {
+                    $product->meta_keywords = '';
+                }
+                if(!empty($data['is_featured']))
+                {
+                    $product->is_featured = $data['is_featured'];
+                }
+                else
+                {
+                    $product->is_featured = 0;
+                }
+                if(!empty($data['status']))
+                {
+                    $product->status = $data['status'];
+                }
+                else
+                {
+                    $product->status = 0;
+                }
+
+                $product->product_video = '';
+                $product->main_image = '';
             }
         }
         else
