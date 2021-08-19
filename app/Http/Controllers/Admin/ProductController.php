@@ -76,13 +76,13 @@ class ProductController extends Controller
                         'sleeve_id' => 'required',
                         'wash_care' => 'required|string|min:1|max:1000',
                         'occasion' => 'required',
-                        'product_weight' => 'required|numeric|between:0,99.99',
+                        'product_weight' => 'required|numeric|between:0,9999.99',
                         'product_price' => 'required|numeric',
                         'product_discount' => 'required|numeric|between:0,99.99',
                         'pattern_id' => 'required',
                         'fit_id' => 'required',
                         'main_image' => 'sometimes|mimes:jpeg,png,jpg',
-                        'product_video' => 'sometimes|mimes:jpeg,png,jpg',
+                        'product_video' => 'sometimes|mimes:video/x-flv,video/mp4,application/x-mpegURL,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi',
                         'category_description' => 'required|string|min:1|max:1000',
                         // 'meta_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
                         // 'meta_title' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
@@ -115,6 +115,33 @@ class ProductController extends Controller
                 $product->fit = $data['fit_id'];
                 $product->occasion = $data['occasion'];
 
+                if($request->hasFile('main_image'))
+                {
+                    $image_tmp = $request->file('main_image');
+                    if($image_tmp->isValid())
+                    {
+                        // $extension = $image_tmp->getClientOriginalExtension();
+                        $extension = $image_tmp->extension();
+                        $fileName = time() . mt_rand() . '.' . $extension;
+
+                        $large_image_path = 'images/product_images/large/' . $fileName;
+                        $medium_image_path = 'images/product_images/medium/' . $fileName;
+                        $small_image_path = 'images/product_images/small/' . $fileName;
+
+                        Image::make($image_tmp)->save($large_image_path);
+                        Image::make($image_tmp)->resize(600, 600)->save($medium_image_path);
+                        Image::make($image_tmp)->resize(300, 300)->save($small_image_path);
+
+                        $product->main_image = $fileName;
+                    }
+                }
+                else
+                {
+                    $product->main_image = '';
+                }
+
+                $product->product_video = '';
+
                 if(!empty($data['meta_title']))
                 {
                     $product->meta_title = $data['meta_title'];
@@ -139,6 +166,7 @@ class ProductController extends Controller
                 {
                     $product->meta_keywords = '';
                 }
+
                 if(!empty($data['is_featured']))
                 {
                     $product->is_featured = $data['is_featured'];
@@ -156,8 +184,11 @@ class ProductController extends Controller
                     $product->status = 0;
                 }
 
-                $product->product_video = '';
-                $product->main_image = '';
+                $product->save();
+
+                Session::flash('success_message', 'Product Added Successfully');
+
+                return redirect('/admin/view-products');
             }
         }
         else
