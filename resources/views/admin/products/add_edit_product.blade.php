@@ -115,14 +115,14 @@
                                                     <input type="file" class="custom-file-input" id="main_image" name="main_image">
                                                     <label class="custom-file-label" for="image">Choose file</label>
                                                 </div>
-                                            </div>
+                                            </div>Please use a visible clear image.
                                         </div>
                                         <div class="form-group">
                                             <label>Select Fabric</label><span style="color: red;"> *</span>
                                             <select class="form-control select2" id="fabric_id" name="fabric_id" style="width: 100%;">
                                                 <option value="">Select</option>
                                                 @foreach($fabricArray as $fabric)
-                                                    <option value="{{ $fabric->description }}" @if(!empty(old('fabric_id')) && $fabric->id == old('fabric_id')) selected @endif>{{ $fabric->description }}</option>
+                                                    <option value="{{ $fabric->description }}" @if(!empty(old('fabric_id')) && $fabric->description == old('fabric_id')) selected @endif>{{ $fabric->description }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -131,7 +131,7 @@
                                             <select class="form-control select2" id="sleeve_id" name="sleeve_id" style="width: 100%;">
                                                 <option value="">Select</option>
                                                 @foreach($sleeveArray as $sleeve)
-                                                    <option value="{{ $sleeve->description }}" @if(!empty(old('sleeve_id')) && $sleeve->id == old('sleeve_id')) selected @endif >{{ $sleeve->description }}</option>
+                                                    <option value="{{ $sleeve->description }}" @if(!empty(old('sleeve_id')) && $sleeve->description == old('sleeve_id')) selected @endif >{{ $sleeve->description }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -156,7 +156,7 @@
                                             <select class="form-control select2" id="occasion" name="occasion" style="width: 100%;">
                                                 <option value="">Select</option>
                                                 @foreach($occasionArray as $occasion)
-                                                    <option value="{{ $occasion->description }}" @if(!empty(old('occasion')) && $occasion->id == old('occasion')) selected @endif>{{ $occasion->description }}</option>
+                                                    <option value="{{ $occasion->description }}" @if(!empty(old('occasion')) && $occasion->description == old('occasion')) selected @endif>{{ $occasion->description }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -179,14 +179,14 @@
                                                     <input type="file" class="custom-file-input" id="product_video" name="product_video">
                                                     <label class="custom-file-label" for="image">Choose file</label>
                                                 </div>
-                                            </div>
+                                            </div>Please use a small video.
                                         </div>
                                         <div class="form-group">
                                             <label>Select Pattern</label><span style="color: red;"> *</span>
                                             <select class="form-control select2" id="pattern_id" name="pattern_id" style="width: 100%;">
                                                 <option value="">Select</option>
                                                 @foreach($patternArray as $pattern)
-                                                    <option value="{{ $pattern->description }}" @if(!empty(old('pattern_id')) && $pattern->id == old('pattern_id')) selected @endif>{{ $pattern->description }}</option>
+                                                    <option value="{{ $pattern->description }}" @if(!empty(old('pattern_id')) && $pattern->description == old('pattern_id')) selected @endif>{{ $pattern->description }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -195,7 +195,7 @@
                                             <select class="form-control select2" id="fit_id" name="fit_id" style="width: 100%;">
                                                 <option value="">Select</option>
                                                 @foreach($fitArray as $fit)
-                                                    <option value="{{ $fit->description }}" @if(!empty(old('fit_id')) && $fit->id == old('fit_id')) selected @endif>{{ $fit->description }}</option>
+                                                    <option value="{{ $fit->description }}" @if(!empty(old('fit_id')) && $fit->description == old('fit_id')) selected @endif>{{ $fit->description }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

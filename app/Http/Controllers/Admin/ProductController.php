@@ -14,6 +14,7 @@ use App\Sleeve;
 use Illuminate\Http\Request;
 use Session;
 use Validator;
+use Image;
 
 class ProductController extends Controller
 {
@@ -82,7 +83,7 @@ class ProductController extends Controller
                         'pattern_id' => 'required',
                         'fit_id' => 'required',
                         'main_image' => 'sometimes|mimes:jpeg,png,jpg',
-                        'product_video' => 'sometimes|mimes:video/x-flv,video/mp4,application/x-mpegURL,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi',
+                        'product_video' => 'sometimes|mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime',
                         'category_description' => 'required|string|min:1|max:1000',
                         // 'meta_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
                         // 'meta_title' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
@@ -139,8 +140,26 @@ class ProductController extends Controller
                 {
                     $product->main_image = '';
                 }
+                if($request->hasFile('product_video'))
+                {
+                    $video_temp = $request->file('product_video');
+                    if($video_temp->isValid())
+                    {
+                        // $video_name = $video_temp->getClientOriginalName();
+                        $video_extension = $video_temp->getClientOriginalExtension();
+                        $video_name = time() . mt_rand() . '.' . $video_extension;
 
-                $product->product_video = '';
+                        $video_path = public_path() . '/videos/product_videos';
+
+                        $video_temp->move($video_path, $video_name);
+
+                        $product->product_video = $video_name;
+                    }
+                }
+                else
+                {
+                    $product->product_video = '';
+                }
 
                 if(!empty($data['meta_title']))
                 {
