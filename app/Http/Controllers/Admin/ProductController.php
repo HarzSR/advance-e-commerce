@@ -64,6 +64,8 @@ class ProductController extends Controller
         {
             $title = "Add Product";
 
+            $productDetail = "";
+
             if($request->isMethod('POST'))
             {
                 $data = $request->all();
@@ -213,6 +215,15 @@ class ProductController extends Controller
         else
         {
             $title = "Edit Product";
+
+            $productDetail = Product::where('id', $id)->first();
+
+            if($productDetail == null)
+            {
+                Session::flash('error_message', 'Invalid Product ID, Please try again.');
+
+                return redirect()->back();
+            }
         }
 
         $fabricArray = Fabric::get();
@@ -223,7 +234,7 @@ class ProductController extends Controller
 
         $categories = Section::with('categories')->get();
 
-        return view('admin.products.add_edit_product')->with(compact('title', 'categories', 'fabricArray', 'sleeveArray', 'patternArray', 'fitArray', 'occasionArray'));
+        return view('admin.products.add_edit_product')->with(compact('title', 'productDetail', 'categories', 'fabricArray', 'sleeveArray', 'patternArray', 'fitArray', 'occasionArray'));
     }
 
     // Delete Product Function

@@ -61,6 +61,7 @@
                                             <th>Product Color</th>
                                             <th>Product Section</th>
                                             <th>Product Category</th>
+                                            <th>Product Image</th>
                                             <th>Is Featured</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -75,6 +76,13 @@
                                                 <td>{{ ucwords($product->product_color) }}</td>
                                                 <td>{{ ucwords($product->section->name) }}</td>
                                                 <td>{{ ucwords($product->category->category_name) }}</td>
+                                                <td>
+                                                    @if(!empty($product->main_image) && file_exists('/images/product_images/small/' . $product->main_image))
+                                                        <img src="{{ asset('/images/product_images/small/' . $product->main_image) }}" alt="{{ $product->main_image }}" height="50px" width="50px">
+                                                    @else
+                                                        <img src="{{ asset('/images/product_images/thumbs/default.jpg') }}" alt="No Image Set" height="100px" width="100px">
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if($product->is_featured == "Yes")
                                                         <button type="button" class="btn btn-success btn-sm" style="pointer-events: none;">Yes</button>
@@ -104,6 +112,7 @@
                                             <th>Product Color</th>
                                             <th>Product Section</th>
                                             <th>Product Category</th>
+                                            <th>Product Image</th>
                                             <th>Is Featured</th>
                                             <th>Status</th>
                                             <th>Action</th>
