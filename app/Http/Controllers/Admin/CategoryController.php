@@ -313,7 +313,7 @@ class CategoryController extends Controller
 
         Category::where(['id' => $id])->update(['category_image' => '']);
 
-        Session::flash('success_message', 'Product Image Removed Successfully');
+        Session::flash('success_message', 'Category Image Removed Successfully');
 
         return redirect()->back();
     }

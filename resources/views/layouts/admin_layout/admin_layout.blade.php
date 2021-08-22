@@ -187,6 +187,7 @@
                             null,
                             null,
                             null,
+                            null,
                             { "visible": false },
                         ],
                     }).buttons().container().appendTo('#products_wrapper .col-md-6:eq(0)');

@@ -72,14 +72,14 @@ class ProductController extends Controller
 
                 $validator = Validator::make($request->all(), [
                         'category_id' => 'required|integer',
-                        'product_name' => 'required|regex:/(^[A-Za-z0-9 ]+$)+/|max:255',
+                        'product_name' => 'required|regex:/(^[A-Za-z0-9 -_]+$)+/|max:255',
                         'product_code' => 'required|alpha_num',
                         'product_color' => 'required|regex:/(^[A-Za-z ]+$)+/',
                         'fabric_id' => 'required',
                         'sleeve_id' => 'required',
                         'wash_care' => 'required|string|min:1|max:1000',
                         'occasion' => 'required',
-                        'product_weight' => 'required|numeric|between:0,9999.99',
+                        'product_weight' => 'required|numeric|between:0,999999.99',
                         'product_price' => 'required|numeric',
                         'product_discount' => 'required|numeric|between:0,99.99',
                         'pattern_id' => 'required',
@@ -216,7 +216,42 @@ class ProductController extends Controller
         {
             $title = "Edit Product";
 
-            $productDetail = Product::where('id', $id)->first();
+            if($request->isMethod('POST'))
+            {
+                $data = $request->all();
+
+                $validator = Validator::make($request->all(), [
+                        'category_id' => 'required|integer',
+                        'product_name' => 'required|regex:/(^[A-Za-z0-9 -_]+$)+/|max:255',
+                        'product_code' => 'required|alpha_num',
+                        'product_color' => 'required|regex:/(^[A-Za-z ]+$)+/',
+                        'fabric_id' => 'required',
+                        'sleeve_id' => 'required',
+                        'wash_care' => 'required|string|min:1|max:1000',
+                        'occasion' => 'required',
+                        'product_weight' => 'required|numeric|between:0,999999.99',
+                        'product_price' => 'required|numeric',
+                        'product_discount' => 'required|numeric|between:0,99.99',
+                        'pattern_id' => 'required',
+                        'fit_id' => 'required',
+                        'main_image' => 'sometimes|mimes:jpeg,png,jpg',
+                        'product_video' => 'sometimes|mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime',
+                        'category_description' => 'required|string|min:1|max:1000',
+                        // 'meta_description' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        // 'meta_title' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                        // 'meta_keywords' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                    ]
+                );
+
+                if ($validator->fails())
+                {
+                    return redirect()->back()->withErrors($validator)->withInput($request->input());
+                }
+
+                dd($data);
+            }
+
+            $productDetail = Product::find($id);
 
             if($productDetail == null)
             {
@@ -235,6 +270,41 @@ class ProductController extends Controller
         $categories = Section::with('categories')->get();
 
         return view('admin.products.add_edit_product')->with(compact('title', 'productDetail', 'categories', 'fabricArray', 'sleeveArray', 'patternArray', 'fitArray', 'occasionArray'));
+    }
+
+    // Delete Product Image Function
+
+    public function deleteProductImage($id = null)
+    {
+        // Hard Delete
+
+        $productImage = Product::select('main_image')->where(['id' => $id])->first();
+
+        $large_image_path = 'images/product_images/large/' . $productImage->main_image;
+        $medium_image_path = 'images/product_images/medium/' . $productImage->main_image;
+        $small_image_path = 'images/product_images/small/' . $productImage->main_image;
+
+        // File::delete($large_image_path, $medium_image_path, $small_image_path);
+        if (file_exists($large_image_path) && !empty($productImage->main_image))
+        {
+            unlink($large_image_path);
+        }
+        if (file_exists($medium_image_path) && !empty($productImage->main_image))
+        {
+            unlink($medium_image_path);
+        }
+        if (file_exists($small_image_path) && !empty($productImage->main_image))
+        {
+            unlink($small_image_path);
+        }
+
+        // Soft Delete
+
+        Product::where(['id' => $id])->update(['main_image' => '']);
+
+        Session::flash('success_message', 'Product Image Removed Successfully');
+
+        return redirect()->back();
     }
 
     // Delete Product Function
