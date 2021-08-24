@@ -77,8 +77,8 @@
                                                 <td>{{ ucwords($product->section->name) }}</td>
                                                 <td>{{ ucwords($product->category->category_name) }}</td>
                                                 <td>
-                                                    @if(!empty($product->main_image) && file_exists('/images/product_images/small/' . $product->main_image))
-                                                        <img src="{{ asset('/images/product_images/small/' . $product->main_image) }}" alt="{{ $product->main_image }}" height="50px" width="50px">
+                                                    @if(!empty($product->main_image) && file_exists('images/product_images/small/' . $product->main_image))
+                                                        <img src="{{ asset('/images/product_images/small/' . $product->main_image) }}" alt="{{ $product->main_image }}" height="100px" width="100px">
                                                     @else
                                                         <img src="{{ asset('/images/product_images/thumbs/default.jpg') }}" alt="No Image Set" height="100px" width="100px">
                                                     @endif

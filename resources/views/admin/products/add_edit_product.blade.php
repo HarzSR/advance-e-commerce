@@ -105,8 +105,15 @@
                                             <label for="image">Product Image</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
+                                                    @if(!empty($productDetail->main_image))
+                                                        <input type="hidden" id="current_image" name="current_image" value="{{ $productDetail->main_image }}">
+                                                    @endif
                                                     <input type="file" class="custom-file-input" id="main_image" name="main_image">
-                                                    <label class="custom-file-label" for="image">Choose file</label>
+                                                    <label class="custom-file-label" for="image" @if(!empty($productDetail->main_image)) style="margin-right: 180px;" @endif>Choose file</label>
+                                                    @if(!empty($productDetail->main_image))
+                                                        <img src="{{ asset('/images/product_images/small/' . $productDetail->main_image) }}" alt="{{ $productDetail->main_image }}" height="90px" width="90px">&nbsp;&nbsp;&nbsp;
+                                                        <a href="{{ url('/admin/delete-product-image/' . $productDetail->id) }}"><button type="button" class="btn btn-danger" style="float: right; display: inline-block;">Delete</button></a>
+                                                    @endif
                                                 </div>
                                             </div>Please use a visible clear image.
                                         </div>
@@ -169,8 +176,15 @@
                                             <label for="image">Product Video</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
+                                                    @if(!empty($productDetail->product_video))
+                                                        <input type="hidden" id="current_video" name="current_video" value="{{ $productDetail->product_video }}">
+                                                    @endif
                                                     <input type="file" class="custom-file-input" id="product_video" name="product_video">
-                                                    <label class="custom-file-label" for="image">Choose file</label>
+                                                    <label class="custom-file-label" for="image" @if(!empty($productDetail->product_video)) style="margin-right: 180px;" @endif>Choose file</label>
+                                                    @if(!empty($productDetail->product_video))
+                                                        <img src="{{ asset('/images/product_images/small/' . $productDetail->product_video) }}" alt="{{ $productDetail->product_video }}" height="90px" width="90px">&nbsp;&nbsp;&nbsp;
+                                                        <a href="{{ url('/admin/delete-product-image/' . $productDetail->id) }}"><button type="button" class="btn btn-danger" style="float: right; display: inline-block;">Delete</button></a>
+                                                    @endif
                                                 </div>
                                             </div>Please use a small video.
                                         </div>

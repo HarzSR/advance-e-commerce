@@ -249,6 +249,12 @@ class ProductController extends Controller
                 }
 
                 dd($data);
+
+                // No current image/video available, No new image/video available => no image/video
+                // Current image/video is available, New image/video available => delete old and place new
+                // Current image/video alone available => no update
+                // New image/video alone available => insert
+                // Delete image/video - AJAX should set current image/video value = 0 or null
             }
 
             $productDetail = Product::find($id);
