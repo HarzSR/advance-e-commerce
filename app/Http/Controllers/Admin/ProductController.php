@@ -248,13 +248,43 @@ class ProductController extends Controller
                     return redirect()->back()->withErrors($validator)->withInput($request->input());
                 }
 
-                dd($data);
+                if(!empty($data['current_image']) && empty($data['main_image']))
+                {
+                    // Current image/video alone available => no update
+                }
+                else if(empty($data['current_image']) && !empty($data['main_image']))
+                {
+                    // New image/video alone available => insert
+                }
+                else if(!empty($data['current_image']) && !empty($data['main_image']))
+                {
+                    // Current image/video is available, New image/video available => delete old and place new
+                }
+                else if(empty($data['current_image']) && empty($data['main_image']))
+                {
+                    // No current image/video available, No new image/video available => no image/video
+                    $main_image = '';
+                }
 
-                // No current image/video available, No new image/video available => no image/video
-                // Current image/video is available, New image/video available => delete old and place new
-                // Current image/video alone available => no update
-                // New image/video alone available => insert
-                // Delete image/video - AJAX should set current image/video value = 0 or null
+                if(!empty($data['current_video']) && empty($data['product_video']))
+                {
+                    // Current image/video alone available => no update
+                }
+                else if(empty($data['current_video']) && !empty($data['product_video']))
+                {
+                    // New image/video alone available => insert
+                }
+                else if(!empty($data['current_video']) && !empty($data['product_video']))
+                {
+                    // Current image/video is available, New image/video available => delete old and place new
+                }
+                else if(empty($data['current_video']) && empty($data['product_video']))
+                {
+                    // No current image/video available, No new image/video available => no image/video
+                    $product_video = '';
+                }
+
+                dd($data);
             }
 
             $productDetail = Product::find($id);
@@ -323,4 +353,6 @@ class ProductController extends Controller
 
         return redirect()->back();
     }
+
+    // Delete image/video - AJAX should set current image/video value = 0 or null
 }
