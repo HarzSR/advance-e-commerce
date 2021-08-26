@@ -109,9 +109,9 @@
                                                         <input type="hidden" id="current_image" name="current_image" value="{{ $productDetail->main_image }}">
                                                     @endif
                                                     <input type="file" class="custom-file-input" id="main_image" name="main_image">
-                                                    <label class="custom-file-label" for="image" @if(!empty($productDetail->main_image)) style="margin-right: 180px;" @endif>Choose file</label>
+                                                    <label class="custom-file-label" for="image" @if(!empty($productDetail->main_image)) style="margin-right: 210px;" @endif>Choose file</label>
                                                     @if(!empty($productDetail->main_image))
-                                                        <img src="{{ asset('/images/product_images/small/' . $productDetail->main_image) }}" alt="{{ $productDetail->main_image }}" height="90px" width="90px">&nbsp;&nbsp;&nbsp;
+                                                        <img src="{{ asset('/images/product_images/small/' . $productDetail->main_image) }}" alt="{{ $productDetail->main_image }}" height="120px" width="120px">&nbsp;&nbsp;&nbsp;
                                                         <a href="{{ url('/admin/delete-product-image/' . $productDetail->id) }}"><button type="button" class="btn btn-danger" style="float: right; display: inline-block;">Delete</button></a>
                                                     @endif
                                                 </div>
@@ -180,10 +180,12 @@
                                                         <input type="hidden" id="current_video" name="current_video" value="{{ $productDetail->product_video }}">
                                                     @endif
                                                     <input type="file" class="custom-file-input" id="product_video" name="product_video">
-                                                    <label class="custom-file-label" for="image" @if(!empty($productDetail->product_video)) style="margin-right: 180px;" @endif>Choose file</label>
+                                                    <label class="custom-file-label" for="image" @if(!empty($productDetail->product_video)) style="margin-right: 250px;" @endif>Choose file</label>
                                                     @if(!empty($productDetail->product_video))
-                                                        <img src="{{ asset('/images/product_images/small/' . $productDetail->product_video) }}" alt="{{ $productDetail->product_video }}" height="90px" width="90px">&nbsp;&nbsp;&nbsp;
-                                                        <a href="{{ url('/admin/delete-product-image/' . $productDetail->id) }}"><button type="button" class="btn btn-danger" style="float: right; display: inline-block;">Delete</button></a>
+                                                        <video width="160" height="120" controls>
+                                                            <source src="{{ asset('/videos/product_videos/' . $productDetail->product_video) }}" type="video/mp4">
+                                                        </video>&nbsp;&nbsp;&nbsp;
+                                                        <a href="{{ url('/admin/delete-product-video/' . $productDetail->id) }}"><button type="button" class="btn btn-danger" style="float: right; display: inline-block;">Delete</button></a>
                                                     @endif
                                                 </div>
                                             </div>Please use a small video.
