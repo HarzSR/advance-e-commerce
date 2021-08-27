@@ -343,6 +343,31 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
+    // Delete Product Video Function
+
+    public function deleteProductVideo($id = null)
+    {
+        // Hard Delete
+
+        $productVideo = Product::select('product_video')->where(['id' => $id])->first();
+
+        $video_path = 'videos/product_videos/' . $productVideo->product_video;
+
+        // File::delete($video_path);
+        if (file_exists($video_path) && !empty($productVideo->product_video))
+        {
+            unlink($video_path);
+        }
+
+        // Soft Delete
+
+        Product::where(['id' => $id])->update(['product_video' => '']);
+
+        Session::flash('success_message', 'Product Video Removed Successfully');
+
+        return redirect()->back();
+    }
+
     // Delete Product Function
 
     public function deleteProduct($id = null)
@@ -353,6 +378,4 @@ class ProductController extends Controller
 
         return redirect()->back();
     }
-
-    // Delete image/video - AJAX should set current image/video value = 0 or null
 }
