@@ -284,6 +284,48 @@ class ProductController extends Controller
                     $product_video = '';
                 }
 
+                if(!empty($data['meta_title']))
+                {
+                    $meta_title = $data['meta_title'];
+                }
+                else
+                {
+                    $meta_title = '';
+                }
+                if(!empty($data['meta_description']))
+                {
+                    $meta_description = $data['meta_description'];
+                }
+                else
+                {
+                    $meta_description = '';
+                }
+                if(!empty($data['meta_keywords']))
+                {
+                    $meta_keywords = $data['meta_keywords'];
+                }
+                else
+                {
+                    $meta_keywords = '';
+                }
+
+                if(!empty($data['is_featured']) && $data['is_featured'] == 1)
+                {
+                    $is_featured = "Yes";
+                }
+                else
+                {
+                    $is_featured = "No";
+                }
+                if(!empty($data['status']))
+                {
+                    $status = $data['status'];
+                }
+                else
+                {
+                    $status = 0;
+                }
+
                 dd($data);
             }
 
