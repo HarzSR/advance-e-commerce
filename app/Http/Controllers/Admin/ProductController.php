@@ -248,6 +248,24 @@ class ProductController extends Controller
                     return redirect()->back()->withErrors($validator)->withInput($request->input());
                 }
 
+                $categoryDetails = Category::find($data['category_id']);
+
+                $category_id = $data['category_id'];
+                $section_id = $categoryDetails->section_id;
+                $product_name = $data['product_name'];
+                $product_code = $data['product_code'];
+                $product_color = $data['product_color'];
+                $product_price = $data['product_price'];
+                $product_discount = $data['product_discount'];
+                $product_weight = $data['product_weight'];
+                $description = $data['category_description'];
+                $wash_care = $data['wash_care'];
+                $fabric = $data['fabric_id'];
+                $pattern = $data['pattern_id'];
+                $sleeve = $data['sleeve_id'];
+                $fit = $data['fit_id'];
+                $occasion = $data['occasion'];
+
                 if(!empty($data['current_image']) && empty($data['main_image']))
                 {
                     // Current image/video alone available => no update
