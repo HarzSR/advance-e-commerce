@@ -268,12 +268,10 @@ class ProductController extends Controller
 
                 if(!empty($data['current_image']) && empty($data['main_image']))
                 {
-                    // Current image/video alone available => no update
                     $main_image = $data['current_image'];
                 }
                 else if(empty($data['current_image']) && !empty($data['main_image']))
                 {
-                    // New image/video alone available => insert
                     if($request->hasFile('main_image'))
                     {
                         $image_tmp = $request->file('main_image');
@@ -297,22 +295,40 @@ class ProductController extends Controller
                 }
                 else if(!empty($data['current_image']) && !empty($data['main_image']))
                 {
-                    // Current image/video is available, New image/video available => delete old and place new
+                    $this->deleteProductImage($id);
+
+                    if($request->hasFile('main_image'))
+                    {
+                        $image_tmp = $request->file('main_image');
+                        if($image_tmp->isValid())
+                        {
+                            // $extension = $image_tmp->getClientOriginalExtension();
+                            $extension = $image_tmp->extension();
+                            $fileName = time() . mt_rand() . '.' . $extension;
+
+                            $large_image_path = 'images/product_images/large/' . $fileName;
+                            $medium_image_path = 'images/product_images/medium/' . $fileName;
+                            $small_image_path = 'images/product_images/small/' . $fileName;
+
+                            Image::make($image_tmp)->save($large_image_path);
+                            Image::make($image_tmp)->resize(600, 600)->save($medium_image_path);
+                            Image::make($image_tmp)->resize(300, 300)->save($small_image_path);
+
+                            $main_image = $fileName;
+                        }
+                    }
                 }
                 else if(empty($data['current_image']) && empty($data['main_image']))
                 {
-                    // No current image/video available, No new image/video available => no image/video
                     $main_image = '';
                 }
 
                 if(!empty($data['current_video']) && empty($data['product_video']))
                 {
-                    // Current image/video alone available => no update
                     $product_video = $data['current_video'];
                 }
                 else if(empty($data['current_video']) && !empty($data['product_video']))
                 {
-                    // New image/video alone available => insert
                     if($request->hasFile('product_video'))
                     {
                         $video_temp = $request->file('product_video');
@@ -332,11 +348,27 @@ class ProductController extends Controller
                 }
                 else if(!empty($data['current_video']) && !empty($data['product_video']))
                 {
-                    // Current image/video is available, New image/video available => delete old and place new
+                    $this->deleteProductVideo($id);
+
+                    if($request->hasFile('product_video'))
+                    {
+                        $video_temp = $request->file('product_video');
+                        if($video_temp->isValid())
+                        {
+                            // $video_name = $video_temp->getClientOriginalName();
+                            $video_extension = $video_temp->getClientOriginalExtension();
+                            $video_name = time() . mt_rand() . '.' . $video_extension;
+
+                            $video_path = public_path() . '/videos/product_videos';
+
+                            $video_temp->move($video_path, $video_name);
+
+                            $product_video = $video_name;
+                        }
+                    }
                 }
                 else if(empty($data['current_video']) && empty($data['product_video']))
                 {
-                    // No current image/video available, No new image/video available => no image/video
                     $product_video = '';
                 }
 
@@ -382,7 +414,11 @@ class ProductController extends Controller
                     $status = 0;
                 }
 
-                dd($data);
+                Product::where('id', $id)->update(['category_id' => $category_id, 'section_id' => $section_id, 'product_name' => $product_name, 'product_code' => $product_code, 'product_color' => $product_color, 'product_price' => $product_price, 'product_discount' => $product_discount, 'product_weight' => $product_weight, 'main_image' => $main_image, 'product_video' => $product_video, 'description' => $description, 'wash_care' => $wash_care, 'fabric' => $fabric, 'pattern' => $pattern, 'sleeve' => $sleeve, 'fit' => $fit, 'occasion' => $occasion, 'meta_title' => $meta_title,  'meta_description' => $meta_description,  'meta_keywords' => $meta_keywords,  'is_featured' => $is_featured,  'status' => $status]);
+
+                Session::flash('success_message', 'Product Updated Successfully');
+
+                return redirect('/admin/view-products');
             }
 
             $productDetail = Product::find($id);

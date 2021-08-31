@@ -112,7 +112,7 @@
                                                     <label class="custom-file-label" for="image" @if(!empty($productDetail->main_image)) style="margin-right: 210px;" @endif>Choose file</label>
                                                     @if(!empty($productDetail->main_image))
                                                         <img src="{{ asset('/images/product_images/small/' . $productDetail->main_image) }}" alt="{{ $productDetail->main_image }}" height="120px" width="120px">&nbsp;&nbsp;&nbsp;
-                                                        <a href="{{ url('/admin/delete-product-image/' . $productDetail->id) }}"><button type="button" class="btn btn-danger" style="float: right; display: inline-block;">Delete</button></a>
+                                                        <a href="javascript:void(0)" class="confirmDelete" record="Product Image" recordid="{{ $productDetail->id }}" dataName="product-image" dataId="{{ $productDetail->id }}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
                                                     @endif
                                                 </div>
                                             </div>Please use a visible clear image.
@@ -185,7 +185,7 @@
                                                         <video width="160" height="120" controls>
                                                             <source src="{{ asset('/videos/product_videos/' . $productDetail->product_video) }}" type="video/mp4">
                                                         </video>&nbsp;&nbsp;&nbsp;
-                                                        <a href="{{ url('/admin/delete-product-video/' . $productDetail->id) }}"><button type="button" class="btn btn-danger" style="float: right; display: inline-block;">Delete</button></a>
+                                                        <a href="javascript:void(0)" class="confirmDelete" record="Product Video" recordid="{{ $productDetail->id }}" dataName="product-video" dataId="{{ $productDetail->id }}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
                                                     @endif
                                                 </div>
                                             </div>Please use a small video.
@@ -231,7 +231,8 @@
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="status" name="status" @if(! ($errors->any() && is_null(old('status'))) && old('status', $productDetail->status)) checked @endif value="1" style="margin-top: 15px;">
                                     <label class="form-check-label" for="status" style="margin-top: 9px;">Status</label>
-                                    <button type="submit" class="btn btn-primary" style="float: right; display: inline-block;">Submit</button>
+                                    <button type="submit" class="btn btn-primary" style="float: right; display: inline-block; margin-left: 15px;">Submit</button>
+                                    <button type="button" class="btn btn-danger" style="float: right; display: inline-block;" onClick="window.location.reload()">Reset</button>
                                 </div>
                             </div>
                         </div>
@@ -433,7 +434,8 @@
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="status" name="status" @if(!empty(old('status'))) checked @endif value="1" style="margin-top: 15px;">
                                     <label class="form-check-label" for="status" style="margin-top: 9px;">Status</label>
-                                    <button type="submit" class="btn btn-primary" style="float: right; display: inline-block;">Submit</button>
+                                    <button type="submit" class="btn btn-primary" style="float: right; display: inline-block; margin-left: 15px;">Submit</button>
+                                    <button type="button" class="btn btn-danger" style="float: right; display: inline-block;" onClick="window.location.reload()">Reset</button>
                                 </div>
                             </div>
                         </div>

@@ -31,6 +31,8 @@ Things done on this project
 - View Product
 - Delete Product
 - Add/Edit Product
+- Delete Product Picture
+- Delete Product Video
 
 ToDo List
 - Sub Admin Login Issues
