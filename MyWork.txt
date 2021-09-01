@@ -33,6 +33,7 @@ Things done on this project
 - Add/Edit Product
 - Delete Product Picture
 - Delete Product Video
+- Product Attributes
 
 ToDo List
 - Sub Admin Login Issues
