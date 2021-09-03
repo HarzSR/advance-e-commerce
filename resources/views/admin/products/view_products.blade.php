@@ -98,6 +98,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
+                                                    <a href="{{ url('/admin/add-attributes/' . $product->id) }}"><button type="button" class="btn btn-primary btn-sm">Add</button></a>
                                                     <a href="{{ url('/admin/add-edit-product/' . $product->id) }}"><button type="button" class="btn btn-warning btn-sm">Edit</button></a>
                                                     <a href="javascript:void(0)" class="confirmDelete" record="Product" recordid="{{ $product->id }}" dataName="product" dataId="{{ $product->id }}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
                                                 </td>

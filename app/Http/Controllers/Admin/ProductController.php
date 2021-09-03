@@ -512,4 +512,13 @@ class ProductController extends Controller
 
         return redirect()->back();
     }
+
+    // Add Product Attributes Function
+
+    public function addAttributes($id = null)
+    {
+        $productData = Product::find($id);
+
+        return view('admin.products.add_attributes')->with(compact('productData'));
+    }
 }
