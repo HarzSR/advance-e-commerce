@@ -517,8 +517,12 @@ class ProductController extends Controller
 
     public function addAttributes($id = null)
     {
+        Session::put('page', 'add-attributes');
+
+        $title = "Add Product Attributes";
+
         $productData = Product::find($id);
 
-        return view('admin.products.add_attributes')->with(compact('productData'));
+        return view('admin.products.add_attributes')->with(compact('title', 'productData'));
     }
 }
