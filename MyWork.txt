@@ -43,5 +43,6 @@ ToDo List
 - Add Category: Need Test
 - Edit Category fixing - Category dropdown issues (Remove self category)
 - Validate Product Attributes
+- Export Product Attributes not exporting input fields
 
 Not ToDo List

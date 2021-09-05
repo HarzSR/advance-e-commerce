@@ -220,44 +220,44 @@
                                                     <h3 class="card-title">Existing Attributes</h3>
                                                 </div>
                                                 <div class="card-body">
-                                                    <table id="products" class="table table-bordered table-hover table-striped">
+                                                    <table id="viewAttributes" class="table table-bordered table-hover table-striped">
                                                         <thead>
-                                                        <tr>
-                                                            <th>SKU</th>
-                                                            <th>Size</th>
-                                                            <th>Price</th>
-                                                            <th>Stock</th>
-                                                            <th>Status</th>
-                                                            <th>Action</th>
-                                                        </tr>
+                                                            <tr>
+                                                                <th>SKU</th>
+                                                                <th>Size</th>
+                                                                <th>Price</th>
+                                                                <th>Stock</th>
+                                                                <th>Status</th>
+                                                                <th>Action</th>
+                                                            </tr>
                                                         </thead>
                                                         <tbody>
-                                                        @foreach($productData->attributes as $attribute)
-                                                            <tr>
-                                                                <td><input type="hidden" name="sku[]" value="{{ $attribute->sku }}" id="sku"/>{{ $attribute->sku }}</td>
-                                                                <td>{{ $attribute->size }}</td>
-                                                                <td><input type="number" name="price[]" value="{{ number_format($attribute->price, 2, '.', '') }}" id="price" placeholder="Price" required/></td>
-                                                                <td><input type="number" name="stock[]" value="{{ $attribute->stock }}" id="stock" placeholder="Stock" required/></td>
-                                                                <td>
-                                                                    @if($attribute->status == 1)
-                                                                        <button type="button" class="btn btn-success btn-sm" style="pointer-events: none;">Active</button>
-                                                                    @else
-                                                                        <button type="button" class="btn btn-danger btn-sm" style="pointer-events: none;">Inactive</button>
-                                                                    @endif
-                                                                </td>
-                                                                <td></td>
-                                                            </tr>
-                                                        @endforeach
+                                                            @foreach($productData->attributes as $attribute)
+                                                                <tr>
+                                                                    <td><input type="hidden" name="sku[]" value="{{ $attribute->sku }}" id="sku"/>{{ $attribute->sku }}</td>
+                                                                    <td>{{ $attribute->size }}</td>
+                                                                    <td><input type="number" name="price[]" value="{{ number_format($attribute->price, 2, '.', '') }}" id="price" placeholder="Price" required/></td>
+                                                                    <td><input type="number" name="stock[]" value="{{ $attribute->stock }}" id="stock" placeholder="Stock" required/></td>
+                                                                    <td>
+                                                                        @if($attribute->status == 1)
+                                                                            <a class="updateAttributeStatus" id="attribute-{{ $attribute->id }}" attribute_id="{{ $attribute->id }}" href="javascript:void(0)"><button type="button" class="btn btn-success btn-sm" style="pointer-events: none;">Active</button><span id="ajaxStatus-{{ $attribute->id }}" class="ajaxStatus-{{ $attribute->id }}"></span></a>
+                                                                        @else
+                                                                            <a class="updateAttributeStatus" id="attribute-{{ $attribute->id }}" attribute_id="{{ $attribute->id }}" href="javascript:void(0)"><button type="button" class="btn btn-danger btn-sm" style="pointer-events: none;">Inactive</button><span id="ajaxStatus-{{ $attribute->id }}" class="ajaxStatus-{{ $attribute->id }}"></span></a>
+                                                                        @endif
+                                                                    </td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            @endforeach
                                                         </tbody>
                                                         <tfoot>
-                                                        <tr>
-                                                            <th>SKU</th>
-                                                            <th>Size</th>
-                                                            <th>Price</th>
-                                                            <th>Stock</th>
-                                                            <th>Status</th>
-                                                            <th>Action</th>
-                                                        </tr>
+                                                            <tr>
+                                                                <th>SKU</th>
+                                                                <th>Size</th>
+                                                                <th>Price</th>
+                                                                <th>Stock</th>
+                                                                <th>Status</th>
+                                                                <th>Action</th>
+                                                            </tr>
                                                         </tfoot>
                                                     </table>
                                                 </div>

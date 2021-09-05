@@ -154,6 +154,41 @@ $(document).ready(function (){
         });
     });
 
+    $(".updateAttributeStatus").click(function (){
+        var status = $(this).text();
+        var attribute_id = $(this).attr("attribute_id");
+        $("#ajaxStatus-" + attribute_id).html("Loading...");
+        $.ajax({
+            type: 'post',
+            data: {
+                status: status,
+                attribute_id: attribute_id,
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/admin/update-attribute-status',
+            success: function (response)
+            {
+                console.log(response);
+                if(response['status'] == 0)
+                {
+                    $("#attribute-" + attribute_id).html("<a class=\"updateAttributeStatus\" id=\"attribute-{{ " + attribute_id + " }}\" attribute_id=\"{{ " + attribute_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-danger btn-sm\" style=\"pointer-events: none;\">Inactive</button></a>");
+                    $("#ajaxStatus" + attribute_id).html("");
+                }
+                else if(response['status'] == 1)
+                {
+                    $("#attribute-" + attribute_id).html("<a class=\"updateAttributeStatus\" id=\"attribute-{{ " + attribute_id + " }}\" attribute_id=\"{{ " + attribute_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-success btn-sm\" style=\"pointer-events: none;\">Active</button></a>");
+                    $("#ajaxStatus" + attribute_id).html("");
+                }
+            },
+            error: function (response)
+            {
+                // console.log("Error : " + response);
+            }
+        });
+    });
+
     if(document.getElementById("parent_id") != null)
     {
         $("#parent_id").attr('disabled','disabled');

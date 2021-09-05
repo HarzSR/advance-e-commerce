@@ -575,13 +575,47 @@ class ProductController extends Controller
         return view('admin.products.add_attributes')->with(compact('title', 'productData', 'categoryData', 'sectionData'));
     }
 
+    // Update Attribute Values Function
+
     public function updateAttributes(Request $request, $id = null)
     {
         if($request->isMethod('POST'))
         {
             $data = $request->all();
 
-            dd($data);
+            foreach($data['sku'] as $key => $value)
+            {
+                if(!empty($value))
+                {
+                    ProductsAttribute::where(['product_id' => $id, 'sku' => $value])->update(['price' => $data['price'][$key], 'stock' => $data['stock'][$key]]);
+                }
+            }
+
+            Session::flash('success_message', 'Product Attributes Updated Successfully');
+
+            return redirect()->back();
+        }
+    }
+
+    // Update Attribute Status Function
+
+    public function updateAttributeStatus(Request $request)
+    {
+        if($request->ajax())
+        {
+            $data = $request->all();
+
+            if ($data['status'] == "Active")
+            {
+                $status = 0;
+            } else
+            {
+                $status = 1;
+            }
+
+            ProductsAttribute::where('id', $data['attribute_id'])->update(['status' => $status]);
+
+            return response()->json(['status' => $status, 'attribute_id' => $data['attribute_id']]);
         }
     }
 }

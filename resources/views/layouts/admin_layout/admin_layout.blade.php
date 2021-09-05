@@ -193,6 +193,23 @@
                     }).buttons().container().appendTo('#products_wrapper .col-md-6:eq(0)');
                 });
             @endif
+            @if(Session::get('page') == "add-attributes")
+                $(function () {
+                    $("#viewAttributes").DataTable({
+                        "responsive": true,
+                        "lengthChange": false,
+                        "autoWidth": false,
+                        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                        "columns": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                        ],
+                    }).buttons().container().appendTo('#viewAttributes_wrapper .col-md-6:eq(0)');
+                });
+            @endif
             @if(Session::get('page') == "add-edit-category")
                 $(function () {
                     //Initialize Select2 Elements
