@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Occasion;
 use App\Pattern;
 use App\Product;
+use App\ProductsAttribute;
 use App\Section;
 use App\Sleeve;
 use Illuminate\Http\Request;
@@ -515,14 +516,72 @@ class ProductController extends Controller
 
     // Add Product Attributes Function
 
-    public function addAttributes($id = null)
+    public function addAttributes(Request $request, $id = null)
     {
         Session::put('page', 'add-attributes');
 
         $title = "Add Product Attributes";
 
-        $productData = Product::find($id);
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
 
-        return view('admin.products.add_attributes')->with(compact('title', 'productData'));
+            foreach($data['sku'] as $key => $value)
+            {
+                if(!empty($value))
+                {
+                    // Prevent duplicate SKU
+
+                    $skuCount = ProductsAttribute::where(['sku' => $value, 'product_id' => $id])->count();
+
+                    if($skuCount > 0)
+                    {
+                        Session::flash('error_message', 'SKU Already Exists, Please update SKU or try different SKU');
+
+                        return redirect()->back();
+                    }
+
+                    $sizeCount = ProductsAttribute::where(['size' => $data['size'][$key], 'product_id' => $id])->count();
+
+                    if($sizeCount > 0)
+                    {
+                        Session::flash('error_message', 'Size Already Exists, Please update Size or try different Size');
+
+                        return redirect()->back();
+                    }
+
+                    $attribute = new ProductsAttribute;
+
+                    $attribute->product_id = $id;
+                    $attribute->size = $data['size'][$key];
+                    $attribute->price = $data['price'][$key];
+                    $attribute->stock = $data['stock'][$key];
+                    $attribute->sku = $value;
+                    $attribute->status = 1;
+
+                    $attribute->save();
+                }
+            }
+
+            Session::flash('success_message', 'Product Attributes Added Successfully');
+
+            return redirect()->back();
+        }
+
+        $productData = Product::with('attributes')->find($id);
+        $categoryData = Category::find($productData->category_id);
+        $sectionData = Section::find($productData->section_id);
+
+        return view('admin.products.add_attributes')->with(compact('title', 'productData', 'categoryData', 'sectionData'));
+    }
+
+    public function updateAttributes(Request $request, $id = null)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+
+            dd($data);
+        }
     }
 }

@@ -35,12 +35,13 @@ Things done on this project
 - Delete Product Video
 - Product Attributes
 - Add/Edit Product Attributes
+- Update Product Attributes
 
 ToDo List
 - Sub Admin Login Issues
 - Ajax failure message display
 - Add Category: Need Test
 - Edit Category fixing - Category dropdown issues (Remove self category)
-- Add Add/Edit Product Function
+- Validate Product Attributes
 
 Not ToDo List

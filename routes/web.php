@@ -60,5 +60,6 @@ Route::prefix('/admin')->namespace('Admin')->group(function (){
 
         // Product Attributes
         Route::match(['get', 'post'], 'add-attributes/{id}', 'ProductController@addAttributes')->name('Add/Edit Product Attributes');
+        Route::post('update-attributes/{id}', 'ProductController@updateAttributes');
     });
 });
