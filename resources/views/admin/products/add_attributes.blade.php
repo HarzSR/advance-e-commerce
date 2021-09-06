@@ -245,7 +245,7 @@
                                                                             <a class="updateAttributeStatus" id="attribute-{{ $attribute->id }}" attribute_id="{{ $attribute->id }}" href="javascript:void(0)"><button type="button" class="btn btn-danger btn-sm" style="pointer-events: none;">Inactive</button><span id="ajaxStatus-{{ $attribute->id }}" class="ajaxStatus-{{ $attribute->id }}"></span></a>
                                                                         @endif
                                                                     </td>
-                                                                    <td></td>
+                                                                    <td><a href="javascript:void(0)" class="confirmDelete" record="Product Attribute" recordid="{{ $attribute->id }}" dataName="product-attribute" dataId="{{ $attribute->id }}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>

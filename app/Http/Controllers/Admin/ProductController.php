@@ -451,31 +451,34 @@ class ProductController extends Controller
 
         $productImage = Product::select('main_image')->where(['id' => $id])->first();
 
-        $large_image_path = 'images/product_images/large/' . $productImage->main_image;
-        $medium_image_path = 'images/product_images/medium/' . $productImage->main_image;
-        $small_image_path = 'images/product_images/small/' . $productImage->main_image;
-
-        // File::delete($large_image_path, $medium_image_path, $small_image_path);
-        if (file_exists($large_image_path) && !empty($productImage->main_image))
+        if(!empty($productImage))
         {
-            unlink($large_image_path);
+            $large_image_path = 'images/product_images/large/' . $productImage->main_image;
+            $medium_image_path = 'images/product_images/medium/' . $productImage->main_image;
+            $small_image_path = 'images/product_images/small/' . $productImage->main_image;
+
+            // File::delete($large_image_path, $medium_image_path, $small_image_path);
+            if (file_exists($large_image_path) && !empty($productImage->main_image))
+            {
+                unlink($large_image_path);
+            }
+            if (file_exists($medium_image_path) && !empty($productImage->main_image))
+            {
+                unlink($medium_image_path);
+            }
+            if (file_exists($small_image_path) && !empty($productImage->main_image))
+            {
+                unlink($small_image_path);
+            }
+
+            // Soft Delete
+
+            Product::where(['id' => $id])->update(['main_image' => '']);
+
+            Session::flash('success_message', 'Product Image Removed Successfully');
+
+            return redirect()->back();
         }
-        if (file_exists($medium_image_path) && !empty($productImage->main_image))
-        {
-            unlink($medium_image_path);
-        }
-        if (file_exists($small_image_path) && !empty($productImage->main_image))
-        {
-            unlink($small_image_path);
-        }
-
-        // Soft Delete
-
-        Product::where(['id' => $id])->update(['main_image' => '']);
-
-        Session::flash('success_message', 'Product Image Removed Successfully');
-
-        return redirect()->back();
     }
 
     // Delete Product Video Function
@@ -486,27 +489,43 @@ class ProductController extends Controller
 
         $productVideo = Product::select('product_video')->where(['id' => $id])->first();
 
-        $video_path = 'videos/product_videos/' . $productVideo->product_video;
-
-        // File::delete($video_path);
-        if (file_exists($video_path) && !empty($productVideo->product_video))
+        if(!empty($productVideo))
         {
-            unlink($video_path);
+            $video_path = 'videos/product_videos/' . $productVideo->product_video;
+
+            // File::delete($video_path);
+            if (file_exists($video_path) && !empty($productVideo->product_video))
+            {
+                unlink($video_path);
+            }
+
+            // Soft Delete
+
+            Product::where(['id' => $id])->update(['product_video' => '']);
+
+            Session::flash('success_message', 'Product Video Removed Successfully');
+
+            return redirect()->back();
         }
-
-        // Soft Delete
-
-        Product::where(['id' => $id])->update(['product_video' => '']);
-
-        Session::flash('success_message', 'Product Video Removed Successfully');
-
-        return redirect()->back();
     }
 
     // Delete Product Function
 
     public function deleteProduct($id = null)
     {
+        $this->deleteProductImage($id);
+        $this->deleteProductVideo($id);
+
+        $attributeData = ProductsAttribute::where(['product_id' => $id])->get();
+
+        if(!empty($attributeData))
+        {
+            foreach ($attributeData as $attribute)
+            {
+                $this->deleteAttributes($attribute->id);
+            }
+        }
+
         Product::where('id', $id)->delete();
 
         Session::flash('success_message', 'Product Removed Successfully');
@@ -617,5 +636,16 @@ class ProductController extends Controller
 
             return response()->json(['status' => $status, 'attribute_id' => $data['attribute_id']]);
         }
+    }
+
+    // Delete Attribute Function
+
+    public function deleteAttributes($id = null)
+    {
+        ProductsAttribute::where('id', $id)->delete();
+
+        Session::flash('success_message', 'Product Attributes Removed Successfully');
+
+        return redirect()->back();
     }
 }
