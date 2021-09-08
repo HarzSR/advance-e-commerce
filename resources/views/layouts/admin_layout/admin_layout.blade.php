@@ -206,6 +206,7 @@
                             null,
                             null,
                             null,
+                            null,
                         ],
                     }).buttons().container().appendTo('#viewAttributes_wrapper .col-md-6:eq(0)');
                 });
