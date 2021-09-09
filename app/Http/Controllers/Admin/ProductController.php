@@ -539,7 +539,7 @@ class ProductController extends Controller
     {
         Session::put('page', 'add-attributes');
 
-        $title = "Add Product Attributes";
+        $title = "Add/Edit Product Attributes";
 
         if($request->isMethod('POST'))
         {
@@ -647,5 +647,18 @@ class ProductController extends Controller
         Session::flash('success_message', 'Product Attributes Removed Successfully');
 
         return redirect()->back();
+    }
+
+    //
+
+    public function addImages($id = null)
+    {
+        Session::put('page', 'add-images');
+
+        $title = "Add/Edit Product Images";
+
+        $productData = Product::with('images')->find($id);
+
+        return view('admin.products.add_images')->with(compact('title', 'productData'));
     }
 }

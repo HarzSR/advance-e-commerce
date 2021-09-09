@@ -66,7 +66,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item @if(Session::get('page') == "view-sections" || Session::get('page') == "view-categories" || Session::get('page') == "add-edit-category" || Session::get('page') == "view-products" || Session::get('page') == "add-edit-product" || Session::get('page') == "add-attributes") menu-open @endif">
+                    <li class="nav-item @if(Session::get('page') == "view-sections" || Session::get('page') == "view-categories" || Session::get('page') == "add-edit-category" || Session::get('page') == "view-products" || Session::get('page') == "add-edit-product" || Session::get('page') == "add-attributes" || Session::get('page') == "add-images") menu-open @endif">
                         <a href="#" class="nav-link @if(Session::get('page') == "view-sections" || Session::get('page') == "edit-sections") active @endif">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>
@@ -88,7 +88,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('/admin/view-products') }}" class="nav-link @if(Session::get('page') == "view-products" || Session::get('page') == "add-edit-product" || Session::get('page') == "add-attributes") active @endif">
+                                <a href="{{ url('/admin/view-products') }}" class="nav-link @if(Session::get('page') == "view-products" || Session::get('page') == "add-edit-product" || Session::get('page') == "add-attributes" || Session::get('page') == "add-images") active @endif">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Products</p>
                                 </a>

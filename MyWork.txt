@@ -36,6 +36,7 @@ Things done on this project
 - Product Attributes
 - Add/Edit Product Attributes
 - Update Product Attributes
+- Product Additional Images
 
 ToDo List
 - Sub Admin Login Issues
