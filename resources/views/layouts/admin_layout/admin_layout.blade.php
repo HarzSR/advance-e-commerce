@@ -199,7 +199,7 @@
                         "responsive": true,
                         "lengthChange": false,
                         "autoWidth": false,
-                        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                        "buttons": ["copy", "csv", "excel", "pdf", "print"],
                         "columns": [
                             null,
                             null,
@@ -209,6 +209,23 @@
                             null,
                         ],
                     }).buttons().container().appendTo('#viewAttributes_wrapper .col-md-6:eq(0)');
+                });
+            @endif
+            @if(Session::get('page') == "add-images")
+                $(function () {
+                    $("#viewImages").DataTable({
+                        "responsive": true,
+                        "lengthChange": false,
+                        "autoWidth": false,
+                        "buttons": ["copy", "csv", "excel", "pdf", "print"],
+                        "columns": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                        ],
+                    }).buttons().container().appendTo('#viewImages_wrapper .col-md-6:eq(0)');
                 });
             @endif
             @if(Session::get('page') == "add-edit-category")

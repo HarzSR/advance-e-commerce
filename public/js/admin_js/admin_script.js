@@ -189,6 +189,41 @@ $(document).ready(function (){
         });
     });
 
+    $(".updateImageStatus").click(function (){
+        var status = $(this).text();
+        var image_id = $(this).attr("image_id");
+        $("#ajaxStatus-" + image_id).html("Loading...");
+        $.ajax({
+            type: 'post',
+            data: {
+                status: status,
+                attribute_id: image_id,
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/admin/update-image-status',
+            success: function (response)
+            {
+                console.log(response);
+                if(response['status'] == 0)
+                {
+                    $("#image-" + image_id).html("<a class=\"updateImageStatus\" id=\"image-{{ " + image_id + " }}\" image_id=\"{{ " + image_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-danger btn-sm\" style=\"pointer-events: none;\">Inactive</button></a>");
+                    $("#ajaxStatus" + image_id).html("");
+                }
+                else if(response['status'] == 1)
+                {
+                    $("#image-" + image_id).html("<a class=\"updateImageStatus\" id=\"image-{{ " + image_id + " }}\" image_id=\"{{ " + image_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-success btn-sm\" style=\"pointer-events: none;\">Active</button></a>");
+                    $("#ajaxStatus" + image_id).html("");
+                }
+            },
+            error: function (response)
+            {
+                // console.log("Error : " + response);
+            }
+        });
+    });
+
     if(document.getElementById("parent_id") != null)
     {
         $("#parent_id").attr('disabled','disabled');

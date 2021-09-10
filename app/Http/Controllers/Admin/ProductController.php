@@ -658,7 +658,9 @@ class ProductController extends Controller
         $title = "Add/Edit Product Images";
 
         $productData = Product::with('images')->find($id);
+        $categoryData = Category::find($productData->category_id);
+        $sectionData = Section::find($productData->section_id);
 
-        return view('admin.products.add_images')->with(compact('title', 'productData'));
+        return view('admin.products.add_images')->with(compact('title', 'productData', 'categoryData', 'sectionData'));
     }
 }
