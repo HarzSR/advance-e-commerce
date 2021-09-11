@@ -139,12 +139,11 @@
                                                             <div class="form-group row">
                                                                 <label for="inputExperience" class="col-sm-2 col-form-label">Add New Images</label>
                                                             </div>
-                                                            {{-- <div class="field_wrapper">
+                                                            <div class="field_wrapper">
                                                                 <div>
-                                                                    <input type="file" name="images[]" value="" id="images" placeholder="SKU" required/>&nbsp;&nbsp;
-                                                                    <a href="javascript:void(0);" class="add_button" title="Add field"><img src="{{ asset('images/admin_images/add-icon.png') }}"/></a>
+                                                                    <input type="file" name="images[]" value="" id="images" placeholder="Images" required multiple/>
                                                                 </div>
-                                                            </div> --}}
+                                                            </div>
                                                         </div>
                                                         <!-- /.tab-pane -->
                                                     </div>

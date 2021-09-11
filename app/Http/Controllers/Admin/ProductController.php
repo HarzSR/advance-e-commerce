@@ -10,6 +10,7 @@ use App\Occasion;
 use App\Pattern;
 use App\Product;
 use App\ProductsAttribute;
+use App\ProductsImage;
 use App\Section;
 use App\Sleeve;
 use Illuminate\Http\Request;
@@ -651,11 +652,44 @@ class ProductController extends Controller
 
     //
 
-    public function addImages($id = null)
+    public function addImages(Request $request, $id = null)
     {
         Session::put('page', 'add-images');
 
         $title = "Add/Edit Product Images";
+
+        if($request->isMethod('POST'))
+        {
+            $data = $request->file('images');
+
+            foreach($data as $key => $image)
+            {
+                $productImage = new ProductsImage;
+
+                $productImage->product_id = $id;
+                
+                // $extension = $image_tmp->getClientOriginalExtension();
+                $extension = $image->extension();
+                $fileName = time() . mt_rand() . '.' . $extension;
+
+                $large_image_path = 'images/product_images/large/' . $fileName;
+                $medium_image_path = 'images/product_images/medium/' . $fileName;
+                $small_image_path = 'images/product_images/small/' . $fileName;
+
+                Image::make($image)->save($large_image_path);
+                Image::make($image)->resize(600, 600)->save($medium_image_path);
+                Image::make($image)->resize(300, 300)->save($small_image_path);
+
+                $productImage->image = $fileName;
+                $productImage->status = 1;
+
+                $productImage->save();
+            }
+
+            Session::flash('success_message', 'Product Images Added Successfully');
+
+            return redirect()->back();
+        }
 
         $productData = Product::with('images')->find($id);
         $categoryData = Category::find($productData->category_id);
