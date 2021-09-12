@@ -239,7 +239,7 @@
                                                                             <a class="updateImageStatus" id="image-{{ $image->id }}" image_id="{{ $image->id }}" href="javascript:void(0)"><button type="button" class="btn btn-danger btn-sm" style="pointer-events: none;">Inactive</button><span id="ajaxStatus-{{ $image->id }}" class="ajaxStatus-{{ $image->id }}"></span></a>
                                                                         @endif
                                                                     </td>
-                                                                    <td><a href="javascript:void(0)" class="confirmDelete" record="Product Attribute" recordid="{{ $image->id }}" dataName="product-attribute" dataId="{{ $image->id }}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></td>
+                                                                    <td><a href="javascript:void(0)" class="confirmDelete" record="Product Images" recordid="{{ $image->id }}" dataName="product-images" dataId="{{ $image->id }}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>

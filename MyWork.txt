@@ -35,8 +35,9 @@ Things done on this project
 - Delete Product Video
 - Product Attributes
 - Add/Edit Product Attributes
-- Update Product Attributes
+- Update/Delete Product Attributes
 - Product Additional Images
+- Update/Delete Product Additional Images
 
 ToDo List
 - Sub Admin Login Issues
@@ -45,5 +46,6 @@ ToDo List
 - Edit Category fixing - Category dropdown issues (Remove self category)
 - Validate Product Attributes
 - Export Product Attributes not exporting input fields
+- Add Additional Videos - need new working
 
 Not ToDo List

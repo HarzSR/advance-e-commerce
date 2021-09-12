@@ -650,7 +650,7 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-    //
+    // Add Additional Images to Product Function
 
     public function addImages(Request $request, $id = null)
     {
@@ -667,7 +667,7 @@ class ProductController extends Controller
                 $productImage = new ProductsImage;
 
                 $productImage->product_id = $id;
-                
+
                 // $extension = $image_tmp->getClientOriginalExtension();
                 $extension = $image->extension();
                 $fileName = time() . mt_rand() . '.' . $extension;
@@ -696,5 +696,38 @@ class ProductController extends Controller
         $sectionData = Section::find($productData->section_id);
 
         return view('admin.products.add_images')->with(compact('title', 'productData', 'categoryData', 'sectionData'));
+    }
+
+    // Update Additional Image Status Function
+
+    public function updateImageStatus(Request $request)
+    {
+        if($request->ajax())
+        {
+            $data = $request->all();
+
+            if ($data['status'] == "Active")
+            {
+                $status = 0;
+            } else
+            {
+                $status = 1;
+            }
+
+            ProductsImage::where('id', $data['attribute_id'])->update(['status' => $status]);
+
+            return response()->json(['status' => $status, 'attribute_id' => $data['attribute_id']]);
+        }
+    }
+
+    // Delete Attribute Function
+
+    public function deleteProductImages($id = null)
+    {
+        ProductsImage::where('id', $id)->delete();
+
+        Session::flash('success_message', 'Product Images Removed Successfully');
+
+        return redirect()->back();
     }
 }
