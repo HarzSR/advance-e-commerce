@@ -517,6 +517,13 @@ class ProductController extends Controller
         $this->deleteProductImage($id);
         $this->deleteProductVideo($id);
 
+        $additionalImages = ProductsImage::where(['product_id' => $id])->get();
+
+        foreach ($additionalImages as $additionalImage)
+        {
+            $this->deleteProductImages($additionalImage->id);
+        }
+
         $attributeData = ProductsAttribute::where(['product_id' => $id])->get();
 
         if(!empty($attributeData))
@@ -724,10 +731,37 @@ class ProductController extends Controller
 
     public function deleteProductImages($id = null)
     {
-        ProductsImage::where('id', $id)->delete();
+        // Hard Delete
 
-        Session::flash('success_message', 'Product Images Removed Successfully');
+        $productImage = ProductsImage::select('image')->where(['id' => $id])->first();
 
-        return redirect()->back();
+        if(!empty($productImage))
+        {
+            $large_image_path = 'images/product_images/large/' . $productImage->image;
+            $medium_image_path = 'images/product_images/medium/' . $productImage->image;
+            $small_image_path = 'images/product_images/small/' . $productImage->image;
+
+            // File::delete($large_image_path, $medium_image_path, $small_image_path);
+            if (file_exists($large_image_path) && !empty($productImage->image))
+            {
+                unlink($large_image_path);
+            }
+            if (file_exists($medium_image_path) && !empty($productImage->image))
+            {
+                unlink($medium_image_path);
+            }
+            if (file_exists($small_image_path) && !empty($productImage->image))
+            {
+                unlink($small_image_path);
+            }
+
+            // Soft Delete
+
+            ProductsImage::where('id', $id)->delete();
+
+            Session::flash('success_message', 'Product Images Removed Successfully');
+
+            return redirect()->back();
+        }
     }
 }
