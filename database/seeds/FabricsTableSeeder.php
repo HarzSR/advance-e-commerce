@@ -12,7 +12,7 @@ class FabricsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // Add Fabrics
 
         DB::table('fabrics')->truncate();
 

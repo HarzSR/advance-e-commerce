@@ -12,7 +12,7 @@ class FitsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // Add Fittings
 
         DB::table('fits')->truncate();
 

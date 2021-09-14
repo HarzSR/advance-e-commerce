@@ -12,7 +12,7 @@ class SleevesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // Add Sleeves
 
         DB::table('sleeves')->truncate();
 

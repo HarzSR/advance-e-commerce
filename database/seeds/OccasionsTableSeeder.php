@@ -12,7 +12,7 @@ class OccasionsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // Add Occasions
 
         DB::table('occasions')->truncate();
 

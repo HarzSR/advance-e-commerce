@@ -12,7 +12,7 @@ class PatternsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // Add Patterns
 
         DB::table('patterns')->truncate();
 
