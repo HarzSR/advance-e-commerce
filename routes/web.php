@@ -40,6 +40,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function (){
         Route::post('update-section-status', 'SectionController@updateSectionStatus');
 
         // Categories
+
         Route::get('view-categories', 'CategoryController@viewCategories')->name('View Categories');
         Route::post('update-category-status', 'CategoryController@updateCategoryStatus');
         // Route::match(['get', 'post'], 'add-edit-category/{id?}', 'CategoryController@addEditCategory')->name('Add/Edit Category');
@@ -50,6 +51,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function (){
         Route::get('delete-category/{id}', 'CategoryController@deleteCategory');
 
         // Products
+
         Route::get('view-products', 'ProductController@viewProducts')->name('View Products');
         Route::post('update-product-status', 'ProductController@updateProductStatus');
         Route::match(['get', 'post'], 'add-edit-product', 'ProductController@addEditProduct')->name('Add Category');
@@ -59,14 +61,20 @@ Route::prefix('/admin')->namespace('Admin')->group(function (){
         Route::get('delete-product/{id}', 'ProductController@deleteProduct');
 
         // Product Attributes
+
         Route::match(['get', 'post'], 'add-attributes/{id}', 'ProductController@addAttributes')->name('Add/Edit Product Attributes');
         Route::post('update-attributes/{id}', 'ProductController@updateAttributes');
         Route::post('update-attribute-status', 'ProductController@updateAttributeStatus');
         Route::get('delete-product-attribute', 'ProductController@deleteAttributes');
 
         // Product Additional Images
+
         Route::match(['get', 'post'], 'add-images/{id}', 'ProductController@addImages')->name('Add/Edit Product Images');
         Route::post('update-image-status', 'ProductController@updateImageStatus');
         Route::get('delete-product-images/{id}', 'ProductController@deleteProductImages');
+
+        // Brands
+
+        Route::get('view-brands', 'BrandController@viewBrands')->name('View Brands');
     });
 });

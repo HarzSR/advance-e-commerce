@@ -25,6 +25,7 @@ class ProductController extends Controller
     public function viewProducts()
     {
         Session::put('page', 'view-products');
+
         $products = Product::with(['category' => function($query) {
             $query->select('id', 'category_name');
         }, 'section' => function($query) {
@@ -62,6 +63,7 @@ class ProductController extends Controller
     public function addEditProduct(Request $request, $id = null)
     {
         Session::put('page', 'add-edit-product');
+
         if($id == null)
         {
             $title = "Add Product";

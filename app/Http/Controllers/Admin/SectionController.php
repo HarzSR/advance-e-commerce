@@ -14,6 +14,7 @@ class SectionController extends Controller
     public function viewSections()
     {
         Session::put('page', 'view-sections');
+
         $sections = Section::get();
 
         return view('admin.sections.view_sections')->with(compact('sections'));

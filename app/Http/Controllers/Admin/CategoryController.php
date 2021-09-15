@@ -17,6 +17,7 @@ class CategoryController extends Controller
     public function viewCategories()
     {
         Session::put('page', 'view-categories');
+
         $categories = Category::with('section', 'parentCategory')->get();
 
         return view('admin.categories.view_categories')->with(compact('categories'));
@@ -50,6 +51,7 @@ class CategoryController extends Controller
     public function addEditCategory(Request $request, $id = null)
     {
         Session::put('page', 'add-edit-category');
+
         if($id == null)
         {
             $title = "Add Category";

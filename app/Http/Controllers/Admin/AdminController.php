@@ -86,7 +86,9 @@ class AdminController extends Controller
     public function logout()
     {
         Session::flush();
+
         Auth::guard('admin')->logout();
+
         Session::flash('success_message', 'Logged Out Successfully');
 
         return redirect('/admin');
@@ -97,6 +99,7 @@ class AdminController extends Controller
     public function settings()
     {
         Session::put('page', 'settings');
+
         $userDetails = Admin::where('email', Auth::guard('admin')->user()->email)->first();
 
         return view('admin.admin_settings')->with(compact('userDetails'));
