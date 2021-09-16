@@ -228,6 +228,22 @@
                     }).buttons().container().appendTo('#viewImages_wrapper .col-md-6:eq(0)');
                 });
             @endif
+            @if(Session::get('page') == "view-brands")
+            $(function () {
+                $("#brands").DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                    "columns": [
+                        null,
+                        null,
+                        null,
+                        { "visible": false },
+                    ],
+                }).buttons().container().appendTo('#brands_wrapper .col-md-6:eq(0)');
+            });
+            @endif
             @if(Session::get('page') == "add-edit-category")
                 $(function () {
                     //Initialize Select2 Elements
