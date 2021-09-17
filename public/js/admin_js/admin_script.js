@@ -170,7 +170,7 @@ $(document).ready(function (){
             url: '/admin/update-attribute-status',
             success: function (response)
             {
-                console.log(response);
+                // console.log(response);
                 if(response['status'] == 0)
                 {
                     $("#attribute-" + attribute_id).html("<a class=\"updateAttributeStatus\" id=\"attribute-{{ " + attribute_id + " }}\" attribute_id=\"{{ " + attribute_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-danger btn-sm\" style=\"pointer-events: none;\">Inactive</button></a>");
@@ -197,7 +197,7 @@ $(document).ready(function (){
             type: 'post',
             data: {
                 status: status,
-                attribute_id: image_id,
+                image_id: image_id,
             },
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -205,7 +205,7 @@ $(document).ready(function (){
             url: '/admin/update-image-status',
             success: function (response)
             {
-                console.log(response);
+                // console.log(response);
                 if(response['status'] == 0)
                 {
                     $("#image-" + image_id).html("<a class=\"updateImageStatus\" id=\"image-{{ " + image_id + " }}\" image_id=\"{{ " + image_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-danger btn-sm\" style=\"pointer-events: none;\">Inactive</button></a>");
@@ -215,6 +215,41 @@ $(document).ready(function (){
                 {
                     $("#image-" + image_id).html("<a class=\"updateImageStatus\" id=\"image-{{ " + image_id + " }}\" image_id=\"{{ " + image_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-success btn-sm\" style=\"pointer-events: none;\">Active</button></a>");
                     $("#ajaxStatus" + image_id).html("");
+                }
+            },
+            error: function (response)
+            {
+                // console.log("Error : " + response);
+            }
+        });
+    });
+
+    $(".updateBrandStatus").click(function (){
+        var status = $(this).text();
+        var brand_id = $(this).attr("brand_id");
+        $("#ajaxStatus-" + brand_id).html("Loading...");
+        $.ajax({
+            type: 'post',
+            data: {
+                status: status,
+                brand_id: brand_id,
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/admin/update-brand-status',
+            success: function (response)
+            {
+                console.log(response);
+                if(response['status'] == 0)
+                {
+                    $("#brand-" + brand_id).html("<a class=\"updateBrandStatus\" id=\"brand-{{ " + brand_id + " }}\" brand_id=\"{{ " + brand_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-danger btn-sm\" style=\"pointer-events: none;\">Inactive</button></a>");
+                    $("#ajaxStatus" + brand_id).html("");
+                }
+                else if(response['status'] == 1)
+                {
+                    $("#brand-" + brand_id).html("<a class=\"updateBrandStatus\" id=\"brand-{{ " + brand_id + " }}\" brand_id=\"{{ " + brand_id + " }}\" href=\"javascript:void(0)\"><button type=\"button\" class=\"btn btn-success btn-sm\" style=\"pointer-events: none;\">Active</button></a>");
+                    $("#ajaxStatus" + brand_id).html("");
                 }
             },
             error: function (response)

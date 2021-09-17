@@ -723,9 +723,9 @@ class ProductController extends Controller
                 $status = 1;
             }
 
-            ProductsImage::where('id', $data['attribute_id'])->update(['status' => $status]);
+            ProductsImage::where('id', $data['image_id'])->update(['status' => $status]);
 
-            return response()->json(['status' => $status, 'attribute_id' => $data['attribute_id']]);
+            return response()->json(['status' => $status, 'image_id' => $data['image_id']]);
         }
     }
 

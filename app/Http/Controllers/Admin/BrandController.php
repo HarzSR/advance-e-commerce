@@ -19,4 +19,26 @@ class BrandController extends Controller
 
         return view('admin.brands.view_brands')->with(compact('brands'));
     }
+
+    // Update Brand Status Function
+
+    public function updateBrandsStatus(Request $request)
+    {
+        if($request->ajax())
+        {
+            $data = $request->all();
+
+            if ($data['status'] == "Active")
+            {
+                $status = 0;
+            } else
+            {
+                $status = 1;
+            }
+
+            Brand::where('id', $data['brand_id'])->update(['status' => $status]);
+
+            return response()->json(['status' => $status, 'brand_id' => $data['brand_id']]);
+        }
+    }
 }

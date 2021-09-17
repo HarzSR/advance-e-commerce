@@ -68,9 +68,9 @@
                                                 <td>{{ ucwords($brand->name) }}</td>
                                                 <td>
                                                     @if($brand->status == 1)
-                                                        <a class="updateCategoryStatus" id="brand-{{ $brand->id }}" brand_id="{{ $brand->id }}" href="javascript:void(0)"><button type="button" class="btn btn-success btn-sm" style="pointer-events: none;">Active</button><span id="ajaxStatus-{{ $brand->id }}" class="ajaxStatus-{{ $brand->id }}"></span></a>
+                                                        <a class="updateBrandStatus" id="brand-{{ $brand->id }}" brand_id="{{ $brand->id }}" href="javascript:void(0)"><button type="button" class="btn btn-success btn-sm" style="pointer-events: none;">Active</button><span id="ajaxStatus-{{ $brand->id }}" class="ajaxStatus-{{ $brand->id }}"></span></a>
                                                     @else
-                                                        <a class="updateCategoryStatus" id="brand-{{ $brand->id }}" brand_id="{{ $brand->id }}" href="javascript:void(0)"><button type="button" class="btn btn-danger btn-sm" style="pointer-events: none;">Inactive</button><span id="ajaxStatus-{{ $brand->id }}" class="ajaxStatus-{{ $brand->id }}"></span></a>
+                                                        <a class="updateBrandStatus" id="brand-{{ $brand->id }}" brand_id="{{ $brand->id }}" href="javascript:void(0)"><button type="button" class="btn btn-danger btn-sm" style="pointer-events: none;">Inactive</button><span id="ajaxStatus-{{ $brand->id }}" class="ajaxStatus-{{ $brand->id }}"></span></a>
                                                     @endif
                                                 </td>
                                                 <td>

@@ -76,5 +76,6 @@ Route::prefix('/admin')->namespace('Admin')->group(function (){
         // Brands
 
         Route::get('view-brands', 'BrandController@viewBrands')->name('View Brands');
+        Route::post('update-brand-status', 'BrandController@updateBrandsStatus');
     });
 });

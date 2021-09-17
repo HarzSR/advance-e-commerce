@@ -38,6 +38,9 @@ Things done on this project
 - Update/Delete Product Attributes
 - Product Additional Images
 - Update/Delete Product Additional Images
+- Brand Table
+- View Brand
+- Update Brand Status
 
 ToDo List
 - Sub Admin Login Issues
