@@ -6,6 +6,7 @@ use App\Brand;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
+use Validator;
 
 class BrandController extends Controller
 {
@@ -39,6 +40,39 @@ class BrandController extends Controller
             Brand::where('id', $data['brand_id'])->update(['status' => $status]);
 
             return response()->json(['status' => $status, 'brand_id' => $data['brand_id']]);
+        }
+    }
+
+    // Add/Edit Brand Function
+
+    public function addEditBrand(Request $request,$id = null)
+    {
+        Session::put('page', 'add-edit-brand');
+
+        if($id == null)
+        {
+            $title = "Add Brand";
+
+            if($request->isMethod('POST'))
+            {
+                $data = $request->all();
+
+                $validator = Validator::make($request->all(), [
+                        'brand_name' => 'required|regex:/(^[A-Za-z ]+$)+/|max:255',
+                    ]
+                );
+
+                if ($validator->fails())
+                {
+                    return redirect()->back()->withErrors($validator)->withInput($request->input());
+                }
+            }
+
+            return view('admin.brands.add_edit_brand')->with(compact('title'));
+        }
+        else
+        {
+            $title = "Edit Brand";
         }
     }
 }

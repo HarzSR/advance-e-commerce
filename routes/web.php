@@ -77,5 +77,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function (){
 
         Route::get('view-brands', 'BrandController@viewBrands')->name('View Brands');
         Route::post('update-brand-status', 'BrandController@updateBrandsStatus');
+        Route::match(['get', 'post'], 'add-edit-brand', 'BrandController@addEditBrand')->name('Add Brand');
+        Route::match(['get', 'post'], 'add-edit-brand/{id}', 'BrandController@addEditBrand')->name('Edit Brand');
     });
 });
