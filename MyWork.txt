@@ -50,5 +50,6 @@ ToDo List
 - Validate Product Attributes
 - Export Product Attributes not exporting input fields
 - Add Additional Videos - need new working
+- Block edit to others and not applicable vairable
 
 Not ToDo List

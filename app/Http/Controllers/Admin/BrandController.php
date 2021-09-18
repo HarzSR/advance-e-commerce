@@ -73,6 +73,25 @@ class BrandController extends Controller
         else
         {
             $title = "Edit Brand";
+
+            if($request->isMethod('POST'))
+            {
+                $data = $request->all();
+
+                $validator = Validator::make($request->all(), [
+                        'brand_name' => 'required|regex:/(^[A-Za-z ]+$)+/|max:255',
+                    ]
+                );
+
+                if ($validator->fails())
+                {
+                    return redirect()->back()->withErrors($validator)->withInput($request->input());
+                }
+            }
+
+            $brandDetails = Brand::find($id);
+
+            return view('admin.brands.add_edit_brand')->with(compact('title', 'brandDetails'));
         }
     }
 }

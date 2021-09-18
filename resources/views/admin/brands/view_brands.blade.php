@@ -74,6 +74,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
+                                                    <a href="{{ url('/admin/add-edit-brand/' . $brand->id) }}"><button type="button" class="btn btn-warning btn-sm">Edit</button></a>
                                                     <a href="javascript:void(0)" class="confirmDelete" record="Brand" recordid="{{ $brand->id }}" dataName="brand" dataId="{{ $brand->id }}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
                                                 </td>
                                             </tr>
