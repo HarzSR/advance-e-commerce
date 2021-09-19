@@ -6,7 +6,6 @@ use App\Brand;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
-use Validator;
 
 class BrandController extends Controller
 {
@@ -42,6 +41,7 @@ class BrandController extends Controller
             return response()->json(['status' => $status, 'brand_id' => $data['brand_id']]);
         }
     }
+<<<<<<< HEAD
 
     // Add/Edit Brand Function
 
@@ -94,4 +94,6 @@ class BrandController extends Controller
             return view('admin.brands.add_edit_brand')->with(compact('title', 'brandDetails'));
         }
     }
+=======
+>>>>>>> parent of dd55abe (Eighty Six Commit)
 }

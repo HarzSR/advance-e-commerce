@@ -9,7 +9,37 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Catalogues</h1>*
+                        <h1>Catalogues</h1>
+                        @if(Session::has('error_message'))
+                            <br>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{-- <strong>Oopsy!</strong> Something is wrong. Please try again. --}}
+                                <strong>Oopsy!</strong> {{ Session::get('error_message') }}.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        @if(Session::has('success_message'))
+                            <br>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Bam!</strong> {{ Session::get('success_message') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        @if($errors->any())
+                            <br>
+                            <br>
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -32,36 +62,6 @@
                         <div class="card card-default">
                             <div class="card-header">
                                 <h3 class="card-title" style="margin-top: 9px;">{{ ucwords($title) }}</h3>
-                                @if(Session::has('error_message'))
-                                    <br>
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        {{-- <strong>Oopsy!</strong> Something is wrong. Please try again. --}}
-                                        <strong>Oopsy!</strong> {{ Session::get('error_message') }}.
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                @endif
-                                @if(Session::has('success_message'))
-                                    <br>
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        <strong>Bam!</strong> {{ Session::get('success_message') }}
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                @endif
-                                @if($errors->any())
-                                    <br>
-                                    <br>
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
