@@ -41,6 +41,9 @@ Things done on this project
 - Brand Table
 - View Brand
 - Update Brand Status
+- Add Brand
+- Edit Brand
+- Delete Brand
 
 ToDo List
 - Sub Admin Login Issues
@@ -50,6 +53,7 @@ ToDo List
 - Validate Product Attributes
 - Export Product Attributes not exporting input fields
 - Add Additional Videos - need new working
-- Block edit to others and not applicable vairable
+- Block edit to others and not applicable variable]
+- Change Active/Inactive to Toggle Switch
 
 Not ToDo List

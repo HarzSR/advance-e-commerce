@@ -6,6 +6,7 @@ use App\Brand;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
+use Validator;
 
 class BrandController extends Controller
 {
@@ -41,7 +42,6 @@ class BrandController extends Controller
             return response()->json(['status' => $status, 'brand_id' => $data['brand_id']]);
         }
     }
-<<<<<<< HEAD
 
     // Add/Edit Brand Function
 
@@ -66,6 +66,24 @@ class BrandController extends Controller
                 {
                     return redirect()->back()->withErrors($validator)->withInput($request->input());
                 }
+
+                $brand = new Brand;
+
+                $brand->name = $data['brand_name'];
+                if(!empty($data['status']))
+                {
+                    $brand->status = $data['status'];
+                }
+                else
+                {
+                    $brand->status = 0;
+                }
+
+                $brand->save();
+
+                Session::flash('success_message', 'Brand Added Successfully');
+
+                return redirect('/admin/view-brands');
             }
 
             return view('admin.brands.add_edit_brand')->with(compact('title'));
@@ -87,6 +105,21 @@ class BrandController extends Controller
                 {
                     return redirect()->back()->withErrors($validator)->withInput($request->input());
                 }
+
+                if(!empty($data['status']))
+                {
+                    $status = $data['status'];
+                }
+                else
+                {
+                    $status = 0;
+                }
+
+                Brand::where('id', $id)->update(['name' => $data['brand_name'], 'status' => $status]);
+
+                Session::flash('success_message', 'Brand Updated Successfully');
+
+                return redirect('/admin/view-brands');
             }
 
             $brandDetails = Brand::find($id);
@@ -94,6 +127,15 @@ class BrandController extends Controller
             return view('admin.brands.add_edit_brand')->with(compact('title', 'brandDetails'));
         }
     }
-=======
->>>>>>> parent of dd55abe (Eighty Six Commit)
+
+    // Delete Brand Function
+
+    public function deleteBrand($id = null)
+    {
+        Brand::where('id', $id)->delete();
+
+        Session::flash('success_message', 'Brand Removed Successfully');
+
+        return redirect()->back();
+    }
 }

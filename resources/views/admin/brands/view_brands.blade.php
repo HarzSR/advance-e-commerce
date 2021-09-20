@@ -48,7 +48,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title" style="margin-top: 5px;">Brand Data</h3>
-                                <a href="{{ url('/admin/add-edit-brands/') }}"><button type="button" class="btn btn-primary btn-sm" style="float: right; display: inline-block;">Add Brands</button></a>
+                                <a href="{{ url('/admin/add-edit-brand/') }}"><button type="button" class="btn btn-primary btn-sm" style="float: right; display: inline-block;">Add Brands</button></a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
