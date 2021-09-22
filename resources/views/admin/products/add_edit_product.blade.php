@@ -152,6 +152,15 @@
                                     <!-- /.col -->
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label>Select Brand</label><span style="color: red;"> *</span>
+                                            <select class="form-control select2" id="brand" name="brand" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                @foreach($brandArray as $brand)
+                                                    <option value="{{ $brand->id }}" @if(!empty(old('brand')) && $brand->id == old('brand')) selected @elseif($brand->id == $productDetail->brand_id) selected @endif>{{ $brand->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label>Select Occasion</label><span style="color: red;"> *</span>
                                             <select class="form-control select2" id="occasion" name="occasion" style="width: 100%;">
                                                 <option value="">Select</option>
@@ -216,10 +225,6 @@
                                             <label>Meta Keywords</label>
                                             <textarea class="form-control" id="meta_keywords" name="meta_keywords" rows="3" placeholder="Enter Meta Keywords ...">@if(!empty(old('meta_keywords'))) {{ old('meta_keywords') }} @else {{ $productDetail->meta_keywords }} @endif</textarea>
                                         </div>
-                                        <div class="form-check" style="text-align: center; padding: 25px 0;">
-                                            <input type="checkbox" class="form-check-input" id="is_featured" name="is_featured" @if(! ($errors->any() && is_null(old('is_featured'))) && old('is_featured', $productDetail->is_featured)) checked @endif value="1">
-                                            <label class="form-check-label" for="is_featured">Is Featured</label>
-                                        </div>
                                         <!-- /.form-group -->
                                     </div>
                                     <!-- /.col -->
@@ -229,8 +234,10 @@
                             <!-- /.card-body -->
                             <div class="card-footer">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="status" name="status" @if(! ($errors->any() && is_null(old('status'))) && old('status', $productDetail->status)) checked @endif value="1" style="margin-top: 15px;">
-                                    <label class="form-check-label" for="status" style="margin-top: 9px;">Status</label>
+                                    <input type="checkbox" class="form-check-input" id="is_featured" name="is_featured" @if(! ($errors->any() && is_null(old('is_featured'))) && old('is_featured', $productDetail->is_featured)) checked @endif value="1" style="margin-top: 15px;">
+                                    <label class="form-check-label" for="is_featured" style="margin-top: 9px;">Is Featured</label>
+                                    <input type="checkbox" class="form-check-input" id="status" name="status" @if(! ($errors->any() && is_null(old('status'))) && old('status', $productDetail->status)) checked @endif value="1" style="margin-top: 15px; margin-left: 10px;">
+                                    <label class="form-check-label" for="status" style="margin-top: 9px; margin-left: 28px;">Status</label>
                                     <button type="submit" class="btn btn-primary" style="float: right; display: inline-block; margin-left: 15px;">Submit</button>
                                     <button type="button" class="btn btn-danger" style="float: right; display: inline-block;" onClick="window.location.reload()">Reset</button>
                                 </div>
@@ -364,6 +371,15 @@
                                     <!-- /.col -->
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label>Select Brand</label><span style="color: red;"> *</span>
+                                            <select class="form-control select2" id="brand" name="brand" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                @foreach($brandArray as $brand)
+                                                    <option value="{{ $brand->name }}" @if(!empty(old('brand')) && $brand->name == old('brand')) selected @endif>{{ $brand->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label>Select Occasion</label><span style="color: red;"> *</span>
                                             <select class="form-control select2" id="occasion" name="occasion" style="width: 100%;">
                                                 <option value="">Select</option>
@@ -419,10 +435,6 @@
                                             <label>Meta Keywords</label>
                                             <textarea class="form-control" id="meta_keywords" name="meta_keywords" rows="3" placeholder="Enter Meta Keywords ...">{{ old('meta_keywords') }}</textarea>
                                         </div>
-                                        <div class="form-check" style="text-align: center; padding: 25px 0;">
-                                            <input type="checkbox" class="form-check-input" id="is_featured" name="is_featured" @if(!empty(old('is_featured'))) checked @endif value="1">
-                                            <label class="form-check-label" for="is_featured">Is Featured</label>
-                                        </div>
                                         <!-- /.form-group -->
                                     </div>
                                     <!-- /.col -->
@@ -432,8 +444,10 @@
                             <!-- /.card-body -->
                             <div class="card-footer">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="status" name="status" @if(!empty(old('status'))) checked @endif value="1" style="margin-top: 15px;">
-                                    <label class="form-check-label" for="status" style="margin-top: 9px;">Status</label>
+                                    <input type="checkbox" class="form-check-input" id="is_featured" name="is_featured" @if(!empty(old('is_featured'))) checked @endif value="1" style="margin-top: 15px;">
+                                    <label class="form-check-label" for="is_featured" style="margin-top: 9px;">Is Featured</label>
+                                    <input type="checkbox" class="form-check-input" id="status" name="status" @if(!empty(old('status'))) checked @endif value="1" style="margin-top: 15px; margin-left: 10px;">
+                                    <label class="form-check-label" for="status" style="margin-top: 9px; margin-left: 28px;">Status</label>
                                     <button type="submit" class="btn btn-primary" style="float: right; display: inline-block; margin-left: 15px;">Submit</button>
                                     <button type="button" class="btn btn-danger" style="float: right; display: inline-block;" onClick="window.location.reload()">Reset</button>
                                 </div>

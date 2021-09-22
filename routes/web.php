@@ -54,8 +54,8 @@ Route::prefix('/admin')->namespace('Admin')->group(function (){
 
         Route::get('view-products', 'ProductController@viewProducts')->name('View Products');
         Route::post('update-product-status', 'ProductController@updateProductStatus');
-        Route::match(['get', 'post'], 'add-edit-product', 'ProductController@addEditProduct')->name('Add Category');
-        Route::match(['get', 'post'], 'add-edit-product/{id}', 'ProductController@addEditProduct')->name('Edit Category');
+        Route::match(['get', 'post'], 'add-edit-product', 'ProductController@addEditProduct')->name('Add Product');
+        Route::match(['get', 'post'], 'add-edit-product/{id}', 'ProductController@addEditProduct')->name('Edit Product');
         Route::get('delete-product-image/{id}', 'ProductController@deleteProductImage');
         Route::get('delete-product-video/{id}', 'ProductController@deleteProductVideo');
         Route::get('delete-product/{id}', 'ProductController@deleteProduct');

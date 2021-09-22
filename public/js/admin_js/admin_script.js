@@ -1,4 +1,7 @@
 $(document).ready(function (){
+
+    $('.select2').select2()
+
     // Check Admin Password is Correct or Not
     $("#new_password").attr("disabled", "disabled");
     $("#new_password").val("");

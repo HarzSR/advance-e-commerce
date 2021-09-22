@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Brand;
 use App\Category;
 use App\Fabric;
 use App\Fit;
@@ -82,6 +83,7 @@ class ProductController extends Controller
                         'fabric_id' => 'required',
                         'sleeve_id' => 'required',
                         'wash_care' => 'required|string|min:1|max:1000',
+                        'brand' => 'required',
                         'occasion' => 'required',
                         'product_weight' => 'required|numeric|between:0,999999.99',
                         'product_price' => 'required|numeric',
@@ -120,6 +122,7 @@ class ProductController extends Controller
                 $product->pattern = $data['pattern_id'];
                 $product->sleeve = $data['sleeve_id'];
                 $product->fit = $data['fit_id'];
+                $product->brand = $data['brand'];
                 $product->occasion = $data['occasion'];
 
                 if($request->hasFile('main_image'))
@@ -232,6 +235,7 @@ class ProductController extends Controller
                         'fabric_id' => 'required',
                         'sleeve_id' => 'required',
                         'wash_care' => 'required|string|min:1|max:1000',
+                        'brand' => 'required',
                         'occasion' => 'required',
                         'product_weight' => 'required|numeric|between:0,999999.99',
                         'product_price' => 'required|numeric',
@@ -268,6 +272,7 @@ class ProductController extends Controller
                 $pattern = $data['pattern_id'];
                 $sleeve = $data['sleeve_id'];
                 $fit = $data['fit_id'];
+                $brand = $data['brand'];
                 $occasion = $data['occasion'];
 
                 if(!empty($data['current_image']) && empty($data['main_image']))
@@ -418,7 +423,7 @@ class ProductController extends Controller
                     $status = 0;
                 }
 
-                Product::where('id', $id)->update(['category_id' => $category_id, 'section_id' => $section_id, 'product_name' => $product_name, 'product_code' => $product_code, 'product_color' => $product_color, 'product_price' => $product_price, 'product_discount' => $product_discount, 'product_weight' => $product_weight, 'main_image' => $main_image, 'product_video' => $product_video, 'description' => $description, 'wash_care' => $wash_care, 'fabric' => $fabric, 'pattern' => $pattern, 'sleeve' => $sleeve, 'fit' => $fit, 'occasion' => $occasion, 'meta_title' => $meta_title,  'meta_description' => $meta_description,  'meta_keywords' => $meta_keywords,  'is_featured' => $is_featured,  'status' => $status]);
+                Product::where('id', $id)->update(['category_id' => $category_id, 'section_id' => $section_id, 'brand_id' => $brand, 'product_name' => $product_name, 'product_code' => $product_code, 'product_color' => $product_color, 'product_price' => $product_price, 'product_discount' => $product_discount, 'product_weight' => $product_weight, 'main_image' => $main_image, 'product_video' => $product_video, 'description' => $description, 'wash_care' => $wash_care, 'fabric' => $fabric, 'pattern' => $pattern, 'sleeve' => $sleeve, 'fit' => $fit, 'occasion' => $occasion, 'meta_title' => $meta_title,  'meta_description' => $meta_description,  'meta_keywords' => $meta_keywords,  'is_featured' => $is_featured,  'status' => $status]);
 
                 Session::flash('success_message', 'Product Updated Successfully');
 
@@ -435,15 +440,16 @@ class ProductController extends Controller
             }
         }
 
-        $fabricArray = Fabric::get();
-        $sleeveArray = Sleeve::get();
-        $patternArray = Pattern::get();
-        $fitArray = Fit::get();
-        $occasionArray = Occasion::get();
+        $fabricArray = Fabric::where(['status' => 1])->get();
+        $sleeveArray = Sleeve::where(['status' => 1])->get();
+        $patternArray = Pattern::where(['status' => 1])->get();
+        $fitArray = Fit::where(['status' => 1])->get();
+        $occasionArray = Occasion::where(['status' => 1])->get();
+        $brandArray = Brand::where(['status' => 1])->get();
 
         $categories = Section::with('categories')->get();
 
-        return view('admin.products.add_edit_product')->with(compact('title', 'productDetail', 'categories', 'fabricArray', 'sleeveArray', 'patternArray', 'fitArray', 'occasionArray'));
+        return view('admin.products.add_edit_product')->with(compact('title', 'productDetail', 'categories', 'fabricArray', 'sleeveArray', 'patternArray', 'fitArray', 'occasionArray', 'brandArray'));
     }
 
     // Delete Product Image Function
